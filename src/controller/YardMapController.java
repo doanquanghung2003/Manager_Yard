@@ -17,6 +17,7 @@ import bean.TimeSlot;
 import bean.YardModel;
 import bean.BookingModel;
 import bean.BookingYardModel;
+import java.util.UUID;
 
 public class YardMapController implements Initializable {
     @FXML private Label headerLabel;
@@ -28,6 +29,10 @@ public class YardMapController implements Initializable {
     @FXML private Button btn_maintenance, btn_event;
     private final Map<TimeSlot, YardModel> slotToYardMap = new HashMap<>();
     private final List<TimeSlot> selectedSlots = new ArrayList<>();
+    
+    // Thêm biến để lưu slot đầu tiên được chọn
+    private TimeSlot firstSelectedSlot = null;
+    private YardModel firstSelectedYard = null;
 
     private final String[] timeSlotsWeekday = { "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00",
             "9:30", "10:00", "10:30", "11:00", "11:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00",
@@ -77,17 +82,39 @@ public class YardMapController implements Initializable {
                 showAlert("Bạn chưa chọn ô nào để gán sự kiện.");
                 return;
             }
-            int count = handleChooseEvent(new HashSet<>(selectedSlots), slotToYardMap);
-            showAlert("Đã gán sự kiện cho " + count + " khung giờ.");
-            selectedSlots.clear();
-            slotToYardMap.clear();
-            drawHourView(zoomSlider.getValue());
+            // Kiểm tra các slot đã là sự kiện chưa
+            boolean allAreEvent = true;
+            for (TimeSlot slot : selectedSlots) {
+                YardModel yard = slotToYardMap.get(slot);
+                boolean isEvent = false;
+                for (TimeSlot ts : yard.getEventSlots()) {
+                    if (ts.getStartTime().equals(slot.getStartTime()) && ts.getEndTime().equals(slot.getEndTime())) {
+                        isEvent = true;
+                        break;
+                    }
+                }
+                if (!isEvent) {
+                    allAreEvent = false;
+                    break;
+                }
+            }
+            if (!allAreEvent) {
+                // Nếu có slot chưa là sự kiện, hiện form nhập khách hàng và tạo booking
+                showEventBookingFormForMultipleSlots();
+            } else {
+                // Nếu tất cả đã là sự kiện, giữ nguyên logic cũ
+                int count = handleChooseEvent(new HashSet<>(selectedSlots), slotToYardMap);
+                showAlert("Đã gán sự kiện cho " + count + " khung giờ.");
+                selectedSlots.clear();
+                slotToYardMap.clear();
+                drawHourView(zoomSlider.getValue());
+            }
         });
     }
 
     private void drawHourView(double scale) {
         bookingGrid.getChildren().clear();
-        selectedSlots.clear();
+        // selectedSlots.clear(); // Đừng clear ở đây để giữ slot đã chọn khi vẽ lại
         String[] currentTimeSlots = getCurrentTimeSlots();
         LocalDate selectedDate = datePicker.getValue();
         if (selectedDate == null)
@@ -139,22 +166,44 @@ public class YardMapController implements Initializable {
                             LocalTime slotTime = LocalTime.parse(currentTimeSlots[j], timeFormatter);
                             LocalDateTime slotStart = LocalDateTime.of(selectedDate, slotTime);
                             if (slotStart.equals(bookingRange.getStartTime())) startIdx = j;
+                            // Tìm endIdx bằng cách tìm slot có startTime bằng endTime của booking
                             if (slotStart.equals(bookingRange.getEndTime())) endIdx = j;
                         }
+                        // Nếu không tìm thấy endIdx, tính toán dựa trên thời gian
+                        if (startIdx != -1 && endIdx == -1) {
+                            // Tính số slot cần thiết dựa trên thời gian
+                            long minutes = java.time.Duration.between(bookingRange.getStartTime(), bookingRange.getEndTime()).toMinutes();
+                            int slotsNeeded = (int) Math.ceil((double) minutes / 30.0);
+                            endIdx = startIdx + slotsNeeded - 1;
+                        }
                         if (startIdx == -1) continue;
-                        int span = (endIdx == -1 ? 1 : endIdx - startIdx);
+                        int span = (endIdx == -1 ? 1 : endIdx - startIdx + 1);
                         String timeLabel = bookingRange.getStartTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"))
                                 + " - " + bookingRange.getEndTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+
+                        // Kiểm tra xem booking đã qua thời gian chưa
+                        boolean isPastBooking = bookingRange.getEndTime().isBefore(LocalDateTime.now());
+
                         Button btn = new Button(timeLabel);
                         btn.setPrefSize(cellWidth * span, cellHeight);
-                        btn.setStyle("-fx-background-color: linear-gradient(#FF0000, #CC0000); -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: #900;");
+
+                        // Style cho booking - luôn màu đỏ dù đã qua thời gian hay chưa
+                        String style = "-fx-background-color: linear-gradient(#FF0000, #CC0000); -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: #900;";
+                        btn.setStyle(style);
+                        btn.setDisable(isPastBooking); // Disable nếu đã qua thời gian
+
                         // Tooltip thông tin booking
                         String tooltipText = "Khách: " + booking.getCustomerName() + "\nSĐT: " + booking.getCustomerPhone()
                                 + "\nGiờ: " + timeLabel;
+                        if (isPastBooking) {
+                            tooltipText += "\n(Đã hoàn thành)";
+                        }
                         Tooltip.install(btn, new Tooltip(tooltipText));
-                        
-                        // Khi click: hiện dialog chuyển sân, huỷ đặt
-                        btn.setOnAction(e -> showBookingOptionsDialog(booking, bym, bookingRange));
+
+                        // Chỉ cho phép click nếu chưa qua thời gian
+                        if (!isPastBooking) {
+                            btn.setOnAction(e -> showBookingOptionsDialog(booking, bym, bookingRange));
+                        }
                         bookingGrid.add(btn, startIdx + 1, i + 1, span, 1);
                         for (int k = startIdx; k < startIdx + span; k++) slotDrawn[k] = true;
                     }
@@ -197,23 +246,80 @@ public class YardMapController implements Initializable {
                 if (maintenanceSlot != null || eventSlot != null) {
                     final boolean isMaintenance = maintenanceSlot != null;
                     final TimeSlot finalSlot = isMaintenance ? maintenanceSlot : eventSlot;
+                    
+                    // Tính toán span cho maintenance/event slot
+                    int startIdx = -1, endIdx = -1;
+                    for (int k = 0; k < currentTimeSlots.length; k++) {
+                        LocalTime checkSlotTime = LocalTime.parse(currentTimeSlots[k], timeFormatter);
+                        LocalDateTime checkSlotStart = LocalDateTime.of(selectedDate, checkSlotTime);
+                        if (checkSlotStart.equals(finalSlot.getStartTime())) startIdx = k;
+                        if (checkSlotStart.equals(finalSlot.getEndTime())) endIdx = k;
+                    }
+                    // Nếu không tìm thấy endIdx, tính toán dựa trên thời gian
+                    if (startIdx != -1 && endIdx == -1) {
+                        long minutes = java.time.Duration.between(finalSlot.getStartTime(), finalSlot.getEndTime()).toMinutes();
+                        int slotsNeeded = (int) Math.ceil((double) minutes / 30.0);
+                        endIdx = startIdx + slotsNeeded - 1;
+                    }
+                    
+                    int span = (startIdx == -1 || endIdx == -1) ? 1 : endIdx - startIdx + 1;
                     String labelText = isMaintenance ? "Bảo trì" : "Sự kiện";
                     String style = isMaintenance ? "-fx-background-color: linear-gradient(#FFA500, #FF8C00); -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: #CC6600;"
                                                 : "-fx-background-color: #9932CC; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: black;";
                     Button btn = new Button(labelText);
-                    btn.setPrefSize(cellWidth, cellHeight);
+                    btn.setPrefSize(cellWidth * span, cellHeight);
                     btn.setStyle(style);
-                    btn.setDisable(false); // vẫn cho chọn sân
+                    // Kiểm tra đã qua thời gian chưa
+                    boolean isPastEvent = finalSlot.getEndTime().isBefore(LocalDateTime.now());
+                    btn.setDisable(isPastEvent);
                     // Tooltip
                     String tooltipText = (isMaintenance ? "Bảo trì" : "Sự kiện") + "\nGiờ: " +
                         finalSlot.getStartTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")) +
                         " - " + finalSlot.getEndTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+                    if (isPastEvent) tooltipText += "\n(Đã hoàn thành)";
                     Tooltip.install(btn, new Tooltip(tooltipText));
-                    // Khi click: hiện dialog chuyển sân/huỷ
-                    btn.setOnAction(e -> showMaintenanceOrEventOptionsDialog(yard, finalSlot, isMaintenance));
-                    bookingGrid.add(btn, j + 1, i + 1);
+                    // Khi click: nếu là sự kiện và chưa qua thời gian thì hiện form nhập khách hàng và tạo booking
+                    if (!isMaintenance && !isPastEvent) {
+                        btn.setOnAction(e -> showEventBookingForm(yard, finalSlot));
+                    } else if (!isPastEvent) {
+                        btn.setOnAction(e -> showMaintenanceOrEventOptionsDialog(yard, finalSlot, isMaintenance));
+                    }
+                    if (startIdx != -1) {
+                        bookingGrid.add(btn, startIdx + 1, i + 1, span, 1);
+                        // Đánh dấu các slot đã được vẽ
+                        for (int k = startIdx; k < startIdx + span && k < currentTimeSlots.length; k++) {
+                            slotDrawn[k] = true;
+                        }
+                    } else {
+                        // Fallback: vẽ ở vị trí hiện tại nếu không tìm thấy startIdx
+                        bookingGrid.add(btn, j + 1, i + 1, 1, 1);
+                        slotDrawn[j] = true;
+                    }
                     continue;
                 }
+                // Kiểm tra xem slot này có nằm trong selectedSlots gộp không
+                TimeSlot tempSlot = new TimeSlot(slotStart, slotEnd);
+                boolean isInSelectedRange = false;
+                TimeSlot selectedRangeSlot = null;
+                
+                for (TimeSlot selectedSlot : selectedSlots) {
+                    if (slotToYardMap.containsKey(selectedSlot) && 
+                        slotToYardMap.get(selectedSlot).getYardId().equals(yard.getYardId())) {
+                        // Kiểm tra xem slot hiện tại có nằm hoàn toàn trong khoảng thời gian của selectedSlot không
+                        if (slotStart.compareTo(selectedSlot.getStartTime()) >= 0 && 
+                            slotEnd.compareTo(selectedSlot.getEndTime()) <= 0) {
+                            isInSelectedRange = true;
+                            selectedRangeSlot = selectedSlot;
+                            break;
+                        }
+                    }
+                }
+                
+                // Nếu slot này nằm trong selected range, bỏ qua việc vẽ slot trống
+                if (isInSelectedRange) {
+                    continue;
+                }
+                
                 // Slot trống
                 Button btn = new Button(" ");
                 btn.setPrefSize(cellWidth, cellHeight);
@@ -226,22 +332,214 @@ public class YardMapController implements Initializable {
                     btn.setOnAction(e -> {
                         TimeSlot temp = new TimeSlot(finalSlotStart, finalSlotEnd);
                         if (selectedSlots.contains(temp)) {
+                            // Bỏ chọn slot này
                             selectedSlots.remove(temp);
                             slotToYardMap.remove(temp);
                             btn.setStyle("-fx-background-color: white; -fx-border-color: #bbb; -fx-font-size: "
                                     + fontSize + "px;");
+                            // Reset firstSelectedSlot nếu đây là slot đầu tiên
+                            if (firstSelectedSlot != null && firstSelectedSlot.equals(temp)) {
+                                firstSelectedSlot = null;
+                                firstSelectedYard = null;
+                            }
                         } else {
-                            selectedSlots.add(temp);
-                            slotToYardMap.put(temp, yard);
-                            btn.setStyle(
-                                    "-fx-background-color: #00cc66; -fx-border-color: black; -fx-font-weight: bold; -fx-font-size: "
-                                            + fontSize + "px;");
+                            // Chọn slot này
+                            if (firstSelectedSlot == null) {
+                                // Đây là slot đầu tiên được chọn
+                                firstSelectedSlot = temp;
+                                firstSelectedYard = yard;
+                                selectedSlots.add(temp);
+                                slotToYardMap.put(temp, yard);
+                                System.out.println("Chọn slot đầu tiên: " + temp.getStartTime() + " - " + temp.getEndTime());
+                                btn.setStyle(
+                                        "-fx-background-color: #00cc66; -fx-border-color: black; -fx-font-weight: bold; -fx-font-size: "
+                                                + fontSize + "px;");
+                                                        } else {
+                                System.out.println("Chọn slot thứ hai: " + temp.getStartTime() + " - " + temp.getEndTime());
+                                System.out.println("Slot đầu tiên: " + firstSelectedSlot.getStartTime() + " - " + firstSelectedSlot.getEndTime());
+                                System.out.println("Cùng sân: " + firstSelectedYard.getYardId().equals(yard.getYardId()));
+                                System.out.println("Cùng ngày: " + firstSelectedSlot.getStartTime().toLocalDate().equals(temp.getStartTime().toLocalDate()));
+                                
+                                // Đây là slot thứ hai, kiểm tra xem có cùng sân và cùng ngày không
+                                if (firstSelectedYard.getYardId().equals(yard.getYardId()) && 
+                                    firstSelectedSlot.getStartTime().toLocalDate().equals(temp.getStartTime().toLocalDate())) {
+                                    // Cùng sân và cùng ngày, chọn tất cả slot ở giữa
+                                    selectRangeOfSlots(firstSelectedSlot, temp, yard);
+                                    // Cập nhật giao diện sau khi chọn range
+                                    drawHourView(zoomSlider.getValue());
+                                    // Reset firstSelectedSlot sau khi chọn range
+                                    firstSelectedSlot = null;
+                                    firstSelectedYard = null;
+                                } else {
+                                    // Khác sân hoặc khác ngày, reset và chọn slot mới
+                                    selectedSlots.clear();
+                                    slotToYardMap.clear();
+                                    firstSelectedSlot = temp;
+                                    firstSelectedYard = yard;
+                                    selectedSlots.add(temp);
+                                    slotToYardMap.put(temp, yard);
+                                    btn.setStyle(
+                                            "-fx-background-color: #00cc66; -fx-border-color: black; -fx-font-weight: bold; -fx-font-size: "
+                                                    + fontSize + "px;");
+                                }
+                            }
                         }
                     });
                 }
                 bookingGrid.add(btn, j + 1, i + 1);
             }
+            
+            // Vẽ các slot gộp đã chọn
+            for (TimeSlot selectedSlot : selectedSlots) {
+                if (slotToYardMap.containsKey(selectedSlot) && 
+                    slotToYardMap.get(selectedSlot).getYardId().equals(yard.getYardId())) {
+                    
+                    // Tính toán span cho slot gộp
+                    int startIdx = -1, endIdx = -1;
+                    for (int k = 0; k < currentTimeSlots.length; k++) {
+                        LocalTime checkSlotTime = LocalTime.parse(currentTimeSlots[k], timeFormatter);
+                        LocalDateTime checkSlotStart = LocalDateTime.of(selectedDate, checkSlotTime);
+                        if (checkSlotStart.equals(selectedSlot.getStartTime())) startIdx = k;
+                        if (checkSlotStart.equals(selectedSlot.getEndTime())) endIdx = k;
+                    }
+                    // Nếu không tìm thấy endIdx, tính toán dựa trên thời gian
+                    if (startIdx != -1 && endIdx == -1) {
+                        long minutes = java.time.Duration.between(selectedSlot.getStartTime(), selectedSlot.getEndTime()).toMinutes();
+                        int slotsNeeded = (int) Math.ceil((double) minutes / 30.0);
+                        endIdx = startIdx + slotsNeeded - 1;
+                    }
+                    
+                    if (startIdx != -1 && endIdx != -1) {
+                        int span = endIdx - startIdx + 1;
+                        String timeLabel = selectedSlot.getStartTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"))
+                                + " - " + selectedSlot.getEndTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"));
+                        
+                        Button selectedBtn = new Button(timeLabel);
+                        selectedBtn.setPrefSize(cellWidth * span, cellHeight);
+                        selectedBtn.setStyle("-fx-background-color: #00cc66; -fx-border-color: black; -fx-font-weight: bold; -fx-font-size: " + fontSize + "px;");
+                        
+                        // Thêm action để bỏ chọn
+                        selectedBtn.setOnAction(e -> {
+                            selectedSlots.remove(selectedSlot);
+                            slotToYardMap.remove(selectedSlot);
+                            drawHourView(zoomSlider.getValue());
+                        });
+                        
+                        bookingGrid.add(selectedBtn, startIdx + 1, i + 1, span, 1);
+                    }
+                }
+            }
         }
+    }
+
+    // Thêm hàm selectRangeOfSlots
+    private void selectRangeOfSlots(TimeSlot startSlot, TimeSlot endSlot, YardModel yard) {
+        // Xác định slot đầu và slot cuối dựa trên thời gian
+        LocalDateTime rangeStart = startSlot.getStartTime().isBefore(endSlot.getStartTime()) ? startSlot.getStartTime() : endSlot.getStartTime();
+        LocalDateTime rangeEnd = startSlot.getStartTime().isBefore(endSlot.getStartTime()) ? endSlot.getStartTime() : startSlot.getStartTime();
+
+        // Kiểm tra cùng ngày
+        if (!rangeStart.toLocalDate().equals(rangeEnd.toLocalDate())) {
+            showAlert("Không thể chọn các slot thuộc các ngày khác nhau.");
+            return;
+        }
+
+        // Kiểm tra xem các slot có thuộc lưới thời gian 30 phút
+        String[] currentTimeSlots = getCurrentTimeSlots();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
+        int startIdx = -1, endIdx = -1;
+        for (int i = 0; i < currentTimeSlots.length; i++) {
+            LocalTime slotTime = LocalTime.parse(currentTimeSlots[i], timeFormatter);
+            LocalDateTime slotStart = LocalDateTime.of(rangeStart.toLocalDate(), slotTime);
+            if (slotStart.equals(rangeStart)) startIdx = i;
+            if (slotStart.equals(rangeEnd)) endIdx = i;
+        }
+
+        // Nếu không tìm thấy endIdx, tính toán dựa trên thời gian
+        if (startIdx != -1 && endIdx == -1) {
+            long minutes = java.time.Duration.between(rangeStart, rangeEnd).toMinutes();
+            int slotsNeeded = (int) Math.ceil((double) minutes / 30.0);
+            endIdx = startIdx + slotsNeeded - 1;
+        }
+
+        if (startIdx == -1 || endIdx == -1 || endIdx < startIdx) {
+            showAlert("Khoảng slot không hợp lệ hoặc không thuộc lưới thời gian.");
+            return;
+        }
+
+        // Kiểm tra tính liên tục và tính khả dụng của các slot trong khoảng
+        for (int i = startIdx; i <= endIdx; i++) {
+            LocalTime slotTime = LocalTime.parse(currentTimeSlots[i], timeFormatter);
+            LocalDateTime slotStart = LocalDateTime.of(rangeStart.toLocalDate(), slotTime);
+            LocalDateTime slotEnd = slotStart.plusMinutes(30);
+            TimeSlot tempSlot = new TimeSlot(slotStart, slotEnd);
+
+            // Kiểm tra xem slot có bị chiếm không
+            if (isSlotOccupied(yard, tempSlot)) {
+                showAlert("Khoảng slot đã chọn chứa slot đã được đặt, bảo trì hoặc sự kiện.");
+                return;
+            }
+        }
+
+        // Gộp slot và lưu - sử dụng end time của slot cuối cùng
+        selectedSlots.clear();
+        slotToYardMap.clear();
+        
+        // Tìm end time thực tế của slot cuối cùng - sử dụng start time của slot cuối
+        LocalDateTime actualEndTime = startSlot.getStartTime().isBefore(endSlot.getStartTime()) ? 
+            endSlot.getStartTime() : startSlot.getStartTime();
+        
+        TimeSlot mergedSlot = new TimeSlot(rangeStart, actualEndTime);
+        selectedSlots.add(mergedSlot);
+        slotToYardMap.put(mergedSlot, yard);
+
+        System.out.println("Đã gộp slot: " + mergedSlot.getStartTime().toLocalTime() + " - " + mergedSlot.getEndTime().toLocalTime());
+    }
+
+    // Thêm method kiểm tra slot có bị chiếm không
+    private boolean isSlotOccupied(YardModel yard, TimeSlot slot) {
+        LocalDate selectedDate = datePicker.getValue();
+        if (selectedDate == null) return false;
+        
+        // Kiểm tra booking
+        List<BookingModel> allBookings = DuLieu.getInstance().getBookings();
+        for (BookingModel booking : allBookings) {
+            for (BookingYardModel bym : booking.getBookingYards()) {
+                if (bym.getYardId().equals(yard.getYardId())) {
+                    for (TimeSlot bookingSlot : bym.getSlots()) {
+                        if (bookingSlot.getStartTime().toLocalDate().equals(selectedDate)) {
+                            // Kiểm tra overlap
+                            if (!(slot.getEndTime().isBefore(bookingSlot.getStartTime()) || 
+                                  slot.getStartTime().isAfter(bookingSlot.getEndTime()))) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Kiểm tra maintenance slots
+        for (TimeSlot maintenanceSlot : yard.getMaintenanceSlots()) {
+            if (maintenanceSlot.getStartTime().toLocalDate().equals(selectedDate)) {
+                if (!(slot.getEndTime().isBefore(maintenanceSlot.getStartTime()) || 
+                      slot.getStartTime().isAfter(maintenanceSlot.getEndTime()))) {
+                    return true;
+                }
+            }
+        }
+        
+        // Kiểm tra event slots
+        for (TimeSlot eventSlot : yard.getEventSlots()) {
+            if (eventSlot.getStartTime().toLocalDate().equals(selectedDate)) {
+                if (!(slot.getEndTime().isBefore(eventSlot.getStartTime()) || 
+                      slot.getStartTime().isAfter(eventSlot.getEndTime()))) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
     private void handleMaintenanceSlots() {
@@ -262,12 +560,7 @@ public class YardMapController implements Initializable {
                 }
             }
             if (!existed) {
-                TimeSlot maintenanceSlot = new TimeSlot();
-                maintenanceSlot.setSlotId(UUID.randomUUID().toString());
-                maintenanceSlot.setStartTime(slot.getStartTime());
-                maintenanceSlot.setEndTime(slot.getEndTime());
-                maintenanceSlot.setSlotType("maintenance");
-                maintenanceSlot.setBooked(true);
+                TimeSlot maintenanceSlot = new TimeSlot(slot.getStartTime(), slot.getEndTime());
                 yard.getMaintenanceSlots().add(maintenanceSlot);
             }
         }
@@ -287,12 +580,7 @@ public class YardMapController implements Initializable {
             yard = slotToYardMap.get(slot);
         }
         if (start == null || end == null || yard == null) return 0;
-        TimeSlot eventSlot = new TimeSlot();
-        eventSlot.setSlotId(UUID.randomUUID().toString());
-        eventSlot.setStartTime(start);
-        eventSlot.setEndTime(end);
-        eventSlot.setSlotType("event");
-        eventSlot.setBooked(true);
+        TimeSlot eventSlot = new TimeSlot(start, end);
         boolean exists = false;
         for (TimeSlot ts : yard.getEventSlots()) {
             if (ts.getStartTime().equals(start) && ts.getEndTime().equals(end)) {
@@ -486,6 +774,135 @@ public class YardMapController implements Initializable {
             DuLieu.getInstance().saveYardToFile("yards.json");
             drawHourView(zoomSlider.getValue());
             showAlert("Chuyển sân thành công!");
+        }
+    }
+
+    // Thêm hàm showEventBookingForm
+    private void showEventBookingForm(YardModel yard, TimeSlot eventSlot) {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Đặt sân sự kiện");
+        dialog.setHeaderText("Nhập thông tin khách hàng cho sự kiện");
+        Label nameLabel = new Label("Tên khách hàng:");
+        TextField nameField = new TextField();
+        Label phoneLabel = new Label("SĐT:");
+        TextField phoneField = new TextField();
+        VBox vbox = new VBox(10, nameLabel, nameField, phoneLabel, phoneField);
+        dialog.getDialogPane().setContent(vbox);
+
+        // Thêm các nút: Xác nhận, Hủy đặt, Hủy
+        ButtonType btnConfirm = new ButtonType("Xác nhận", ButtonBar.ButtonData.OK_DONE);
+        ButtonType btnCancelBooking = new ButtonType("Hủy đặt", ButtonBar.ButtonData.NO);
+        ButtonType btnCancel = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().setAll(btnConfirm, btnCancelBooking, btnCancel);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (result.get() == btnConfirm) {
+                String name = nameField.getText().trim();
+                String phone = phoneField.getText().trim();
+                if (name.isEmpty() || phone.isEmpty()) {
+                    showAlert("Vui lòng nhập đầy đủ thông tin khách hàng!");
+                    return;
+                }
+                // Tạo booking mới
+                BookingModel booking = new BookingModel();
+                booking.setBookingId(UUID.randomUUID().toString());
+                booking.setCustomerName(name);
+                booking.setCustomerPhone(phone);
+                booking.setBookingTime(LocalDateTime.now());
+                BookingYardModel bym = new BookingYardModel(yard.getYardId(), new ArrayList<>());
+                bym.getSlots().add(eventSlot);
+                booking.setBookingYards(new ArrayList<>());
+                booking.getBookingYards().add(bym);
+                DuLieu.getInstance().getBookings().add(booking);
+                DuLieu.getInstance().saveBookingToFile("bookings.json");
+                showAlert("Đặt sân sự kiện thành công!");
+                drawHourView(zoomSlider.getValue());
+            } else if (result.get() == btnCancelBooking) {
+                // Hủy đặt - xóa slot này khỏi eventSlots
+                yard.getEventSlots().removeIf(ts ->
+                    ts.getStartTime().equals(eventSlot.getStartTime()) && ts.getEndTime().equals(eventSlot.getEndTime()));
+                DuLieu.getInstance().saveYardToFile("yards.json");
+                showAlert("Đã hủy đặt sự kiện cho slot này.");
+                drawHourView(zoomSlider.getValue());
+            }
+            // Nếu chọn "Hủy" thì không làm gì cả
+        }
+    }
+
+    // Thêm hàm showEventBookingFormForMultipleSlots
+    private void showEventBookingFormForMultipleSlots() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Đặt sân sự kiện");
+        dialog.setHeaderText("Nhập thông tin khách hàng cho các slot sự kiện đã chọn");
+        Label nameLabel = new Label("Tên khách hàng:");
+        TextField nameField = new TextField();
+        Label phoneLabel = new Label("SĐT:");
+        TextField phoneField = new TextField();
+        VBox vbox = new VBox(10, nameLabel, nameField, phoneLabel, phoneField);
+        dialog.getDialogPane().setContent(vbox);
+        // Thêm các nút: Xác nhận, Hủy đặt, Hủy
+        ButtonType btnConfirm = new ButtonType("Xác nhận", ButtonBar.ButtonData.OK_DONE);
+        ButtonType btnCancelBooking = new ButtonType("Hủy đặt", ButtonBar.ButtonData.NO);
+        ButtonType btnCancel = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().setAll(btnConfirm, btnCancelBooking, btnCancel);
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (result.get() == btnConfirm) {
+                String name = nameField.getText().trim();
+                String phone = phoneField.getText().trim();
+                if (name.isEmpty() || phone.isEmpty()) {
+                    showAlert("Vui lòng nhập đầy đủ thông tin khách hàng!");
+                    return;
+                }
+                // Tạo booking mới cho từng slot
+                for (TimeSlot slot : selectedSlots) {
+                    YardModel yard = slotToYardMap.get(slot);
+                    // Gán slot thành sự kiện nếu chưa có
+                    boolean exists = false;
+                    for (TimeSlot ts : yard.getEventSlots()) {
+                        if (ts.getStartTime().equals(slot.getStartTime()) && ts.getEndTime().equals(slot.getEndTime())) {
+                            exists = true;
+                            break;
+                        }
+                    }
+                    if (!exists) {
+                        TimeSlot eventSlot = new TimeSlot(slot.getStartTime(), slot.getEndTime());
+                        yard.getEventSlots().add(eventSlot);
+                    }
+                    // Tạo booking
+                    BookingModel booking = new BookingModel();
+                    booking.setBookingId(UUID.randomUUID().toString());
+                    booking.setCustomerName(name);
+                    booking.setCustomerPhone(phone);
+                    booking.setBookingTime(LocalDateTime.now());
+                    BookingYardModel bym = new BookingYardModel(yard.getYardId(), new ArrayList<>());
+                    bym.getSlots().add(slot);
+                    booking.setBookingYards(new ArrayList<>());
+                    booking.getBookingYards().add(bym);
+                    DuLieu.getInstance().getBookings().add(booking);
+                }
+                DuLieu.getInstance().saveYardToFile("yards.json");
+                DuLieu.getInstance().saveBookingToFile("bookings.json");
+                showAlert("Đặt sân sự kiện thành công!");
+                selectedSlots.clear();
+                slotToYardMap.clear();
+                drawHourView(zoomSlider.getValue());
+            } else if (result.get() == btnCancelBooking) {
+                // Hủy đặt - xóa các slot đã chọn khỏi sự kiện
+                for (TimeSlot slot : selectedSlots) {
+                    YardModel yard = slotToYardMap.get(slot);
+                    // Xóa slot khỏi eventSlots nếu có
+                    yard.getEventSlots().removeIf(ts ->
+                        ts.getStartTime().equals(slot.getStartTime()) && ts.getEndTime().equals(slot.getEndTime()));
+                }
+                DuLieu.getInstance().saveYardToFile("yards.json");
+                showAlert("Đã hủy đặt sự kiện cho các slot đã chọn.");
+                selectedSlots.clear();
+                slotToYardMap.clear();
+                drawHourView(zoomSlider.getValue());
+            }
+            // Nếu chọn "Hủy" thì không làm gì cả
         }
     }
 }

@@ -62,5 +62,105 @@
         ]
       }
     ]
+  },
+  {
+    "bookingId": "ef4937a5-914b-4875-a785-50db60d85702",
+    "customerName": "sơn",
+    "customerPhone": "nobita",
+    "bookingTime": "2025-07-17 11:27",
+    "depositAmount": 0.0,
+    "totalAmount": 0.0,
+    "paymentStatus": "",
+    "paymentTime": "",
+    "serviceIds": [],
+    "bookingYards": [
+      {
+        "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
+        "slots": [
+          {
+            "slotId": "99a1cd34-2e4c-4188-a42c-37edc6a096ab",
+            "startTime": "2025-07-17 14:30",
+            "endTime": "2025-07-17 15:00",
+            "isBooked": true,
+            "slotType": "booking"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "bookingId": "6ac4fbab-d2b2-42db-b844-f3651c7c07f6",
+    "customerName": "sơn",
+    "customerPhone": "nobita",
+    "bookingTime": "2025-07-17 11:27",
+    "depositAmount": 0.0,
+    "totalAmount": 0.0,
+    "paymentStatus": "",
+    "paymentTime": "",
+    "serviceIds": [],
+    "bookingYards": [
+      {
+        "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
+        "slots": [
+          {
+            "slotId": "4cc6e3c1-ac1d-427b-b8db-aa894eceb005",
+            "startTime": "2025-07-17 15:30",
+            "endTime": "2025-07-17 16:00",
+            "isBooked": true,
+            "slotType": "booking"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "bookingId": "49358c75-72c2-4112-9309-c05aa0354d9f",
+    "customerName": "sơn",
+    "customerPhone": "nobita",
+    "bookingTime": "2025-07-17 11:59",
+    "depositAmount": 0.0,
+    "totalAmount": 0.0,
+    "paymentStatus": "",
+    "paymentTime": "",
+    "serviceIds": [],
+    "bookingYards": [
+      {
+        "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
+        "slots": [
+          {
+            "slotId": "975e8559-ca13-4572-a91e-3c55237aed2d",
+            "startTime": "2025-07-17 21:30",
+            "endTime": "2025-07-17 22:00",
+            "isBooked": true,
+            "slotType": "booking"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "bookingId": "1ae25c3e-789e-45c8-a25c-4ae1d35e7340",
+    "customerName": "nobita",
+    "customerPhone": "sơn",
+    "bookingTime": "2025-07-17 11:59",
+    "depositAmount": 0.0,
+    "totalAmount": 0.0,
+    "paymentStatus": "",
+    "paymentTime": "",
+    "serviceIds": [],
+    "bookingYards": [
+      {
+        "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
+        "slots": [
+          {
+            "slotId": "f34ca714-7d0f-44cc-9de0-56d396454164",
+            "startTime": "2025-07-17 20:30",
+            "endTime": "2025-07-17 22:30",
+            "isBooked": true,
+            "slotType": "booking"
+          }
+        ]
+      }
+    ]
   }
 ]

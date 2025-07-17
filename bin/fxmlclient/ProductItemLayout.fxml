@@ -8,7 +8,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="rootCard" alignment="CENTER" prefHeight="220.0" prefWidth="340.0" spacing="10" style="-fx-background-color: rgba(255,253,235,0.5); -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductItemController">
+<VBox fx:id="rootCard" alignment="CENTER" prefHeight="220.0" prefWidth="340.0" spacing="10"
+      styleClass="product-card-milk"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.ProductItemController">
    <padding>
       <Insets bottom="10" left="10" right="10" top="10" />
    </padding>

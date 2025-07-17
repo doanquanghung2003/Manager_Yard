@@ -15,7 +15,15 @@
     "createAt": "2025-07-14 16:52",
     "updateAt": "2025-07-14 16:52",
     "maintenanceSlots": [],
-    "eventSlots": []
+    "eventSlots": [
+      {
+        "slotId": "372f35df-0783-4340-915f-2d68afad9f02",
+        "startTime": "2025-07-17 21:30",
+        "endTime": "2025-07-17 22:00",
+        "isBooked": true,
+        "slotType": "booking"
+      }
+    ]
   },
   {
     "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
@@ -33,6 +41,28 @@
     "createAt": "2025-07-15 16:00",
     "updateAt": "2025-07-15 16:00",
     "maintenanceSlots": [],
-    "eventSlots": []
+    "eventSlots": [
+      {
+        "slotId": "c0449cd6-d663-4d13-803d-b047c7b8a711",
+        "startTime": "2025-07-17 14:30",
+        "endTime": "2025-07-17 15:00",
+        "isBooked": true,
+        "slotType": "event"
+      },
+      {
+        "slotId": "8b91f1b2-2de1-473a-989b-801fc545cdbf",
+        "startTime": "2025-07-17 15:30",
+        "endTime": "2025-07-17 16:00",
+        "isBooked": true,
+        "slotType": "event"
+      },
+      {
+        "slotId": "58b6c768-8923-4013-864e-51724dafd53f",
+        "startTime": "2025-07-17 20:30",
+        "endTime": "2025-07-17 22:30",
+        "isBooked": true,
+        "slotType": "booking"
+      }
+    ]
   }
 ]
