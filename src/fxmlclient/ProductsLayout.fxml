@@ -14,7 +14,7 @@
 
 <StackPane prefHeight="592.0" prefWidth="826.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.YardController">
    <children>
-      <BorderPane fx:id="root" stylesheets="@../application/application.css">
+      <BorderPane fx:id="root">
          <center>
             <HBox maxHeight="Infinity" maxWidth="Infinity" prefHeight="Infinity" prefWidth="Infinity" styleClass="center-bg-box" BorderPane.alignment="CENTER">
                <children>
@@ -44,111 +44,6 @@
                </children>
             </HBox>
          </center>
-         <top>
-            <VBox prefHeight="143.0" prefWidth="748.0" BorderPane.alignment="CENTER">
-               <children>
-                  <BorderPane prefHeight="100" styleClass="header-bar">
-                     <left>
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="logo-image" BorderPane.alignment="CENTER">
-                           <image>
-                              <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
-                           </image>
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
-                        </ImageView>
-                     </left>
-                     <center>
-                        <TextField maxWidth="600" promptText="Tìm kiếm..." styleClass="search-bar" />
-                     </center>
-                     <right>
-                        <HBox alignment="CENTER_RIGHT" spacing="16">
-                           <children>
-                              <Button fx:id="userInfoBtn" styleClass="main-btn" text="Quản lý thông tin" />
-                              <Button fx:id="logoutBtn" styleClass="main-btn" text="Đăng xuất" />
-                           </children>
-                        </HBox>
-                     </right>
-                  </BorderPane>
-                  <HBox alignment="CENTER_LEFT" prefHeight="44" spacing="32" styleClass="menu-bar">
-                     <children>
-                        <Button fx:id="homeBtn" styleClass="menu-btn selected" text="Trang chủ">
-                           <graphic>
-                              <ImageView fitHeight="18" fitWidth="18">
-                                 <image>
-                                    <Image url="@../images/home.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="productListBtn" styleClass="menu-btn" text="Danh sách sân bãi" />
-                    <Button styleClass="menu-btn">Giới thiệu</Button>
-                    <Button styleClass="menu-btn">Chính sách</Button>
-                    <Button styleClass="menu-btn">Điều khoản</Button>
-                    <Button styleClass="menu-btn">Dành cho chủ sân</Button>
-                    <Button styleClass="menu-btn">Liên hệ</Button>
-                    <Button styleClass="menu-btn">Vị trí</Button>
-                    <Button styleClass="menu-btn">Ngôn ngữ</Button>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </top>
-         <bottom>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="footer-bar" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="150.0" spacing="5.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Địa chỉ" />
-                        <Label text="Số điện thoại" />
-                        <Label text="Gmail" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="194.0" spacing="5" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label style="-fx-font-weight: bold;" text="Quy định" />
-                        <Label text="Hướng dẫn tân thủ" />
-                        <Label text="Quy chế hoạt động" />
-                        <Label text="Cách thức thanh toán" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="210.0" spacing="5" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label style="-fx-font-weight: bold;" text="Chính sách" />
-                        <Label text="Chính sách bảo mật" />
-                        <Label text="Chăm sóc khách hàng" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="146.0" spacing="5" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label style="-fx-font-weight: bold;" text="Liên kết nhanh" />
-                        <Label text="Trang chủ" />
-                        <Label text="Tin tức" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="122.0" spacing="5" HBox.hgrow="ALWAYS">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Bản quyền" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" spacing="5" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Label text="Đầu trang" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </bottom>
       </BorderPane>
    </children>
 </StackPane>

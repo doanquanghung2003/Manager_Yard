@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.Node;
 
 public class YardController implements BaseController {
     @FXML
@@ -48,9 +50,14 @@ public class YardController implements BaseController {
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 
+    private BorderPane mainBorderPane;
+    public void setMainBorderPane(BorderPane pane) {
+        this.mainBorderPane = pane;
+        handleShowAllYards();
+    }
+
     	public void initialize() {
 		DuLieu.getInstance().loadYardsFromFile("yards.json");
-		constructorView();
 		setOnAction();
 		refresh();
 
@@ -154,6 +161,8 @@ public class YardController implements BaseController {
                         selectedYards.add(yard);
                     }
                 });
+                controller.setMainBorderPane(mainBorderPane);
+                controller.setOnDetail(yard -> showYardDetail(yard));
 
                 FlowPane.setMargin(itemBox, new Insets(10));
                 flowPane.getChildren().add(itemBox);
@@ -206,6 +215,26 @@ public class YardController implements BaseController {
 
             Stage stage = (Stage) homeBtn.getScene().getWindow();
             stage.getScene().setRoot(homeRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showYardDetail(YardModel yd) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/DetailProduct.fxml"));
+            Parent detailRoot = loader.load();
+
+            ProductDetailController detailController = loader.getController();
+            detailController.setYard(yd);
+
+            // Lấy VBox/HBox vùng center của DetailProduct.fxml
+            BorderPane detailBorderPane = (BorderPane) detailRoot;
+            Node detailContent = detailBorderPane.getCenter(); // Đây là HBox
+
+            if (mainBorderPane != null && detailContent != null) {
+                mainBorderPane.setCenter(detailContent);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

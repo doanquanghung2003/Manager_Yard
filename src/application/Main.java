@@ -10,10 +10,17 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/fxmlClient/Home.fxml"));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
+			FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/mainLayout/LayoutClient.fxml"));
+			Parent mainRoot = mainLoader.load();
+			controller.LayoutClientController mainController = mainLoader.getController();
+
+			FXMLLoader pageLoader = new FXMLLoader(getClass().getResource("/fxmlClient/Home.fxml"));
+			Parent homePage = pageLoader.load();
+
+			mainController.setContent(homePage);
+
+			primaryStage.setScene(new Scene(mainRoot));
+			primaryStage.setTitle("Manager Yard");
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
