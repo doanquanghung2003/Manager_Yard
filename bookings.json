@@ -1,0 +1,66 @@
+[
+  {
+    "bookingId": "e8355a88-3ac5-4038-8c61-23d08e3e1e17",
+    "customerName": "Son",
+    "customerPhone": "23213",
+    "bookingTime": "2025-07-16 14:13",
+    "depositAmount": 1736216.0,
+    "totalAmount": 1736216.0,
+    "paymentStatus": "PAID",
+    "paymentTime": "2025-07-16 14:13",
+    "serviceIds": [
+      "6195d8ce-484e-4289-b5a3-ad4f7c4f6aad"
+    ],
+    "bookingYards": [
+      {
+        "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
+        "slots": [
+          {
+            "slotId": "2a996bbc-e274-457c-83eb-1949654a81d1",
+            "startTime": "2025-07-17 05:00",
+            "endTime": "2025-07-17 07:00",
+            "isBooked": true,
+            "slotType": "booking"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "bookingId": "e7c5b510-ce11-432a-a5e6-cae7685cb4e9",
+    "customerName": "Pham Xuan Son",
+    "customerPhone": "231231",
+    "bookingTime": "2025-07-17 10:34",
+    "depositAmount": 3433378.0,
+    "totalAmount": 3433378.0,
+    "paymentStatus": "PAID",
+    "paymentTime": "2025-07-17 10:34",
+    "serviceIds": [],
+    "bookingYards": [
+      {
+        "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
+        "slots": [
+          {
+            "slotId": "2ab19d7e-e3e6-43b8-93a1-ce94a5cd2922",
+            "startTime": "2025-07-17 11:00",
+            "endTime": "2025-07-17 14:00",
+            "isBooked": true,
+            "slotType": "booking"
+          }
+        ]
+      },
+      {
+        "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
+        "slots": [
+          {
+            "slotId": "9b12c3b9-a9bb-4879-9566-74b9a19c3c29",
+            "startTime": "2025-07-17 16:30",
+            "endTime": "2025-07-17 19:30",
+            "isBooked": true,
+            "slotType": "booking"
+          }
+        ]
+      }
+    ]
+  }
+]

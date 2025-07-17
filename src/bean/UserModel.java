@@ -1,0 +1,110 @@
+package bean;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import com.google.gson.JsonObject;
+
+public class UserModel implements Bean {
+    private String userId;
+    private String userName;
+    private String password;
+    private String email;
+    private String fullName;
+    private LocalDateTime createAt;
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    public UserModel() {
+      
+        this.createAt = LocalDateTime.now();
+    }
+
+    public UserModel(String userName, String password, String email, String fullName, LocalDateTime createAt) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.fullName = fullName;
+        this.createAt = createAt != null ? createAt : LocalDateTime.now();
+    }
+
+    // --- Getter và Setter ---
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public LocalDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    // --- Ghi JSON ---
+    @Override
+    public JsonObject toJsonObject() {
+        JsonObject obj = new JsonObject();
+        obj.addProperty("userId", userId);
+        obj.addProperty("userName", userName);
+        obj.addProperty("password", password);
+        obj.addProperty("email", email);
+        obj.addProperty("fullName", fullName);
+        obj.addProperty("createAt", createAt != null ? createAt.format(FORMATTER) : "");
+        return obj;
+    }
+
+    // --- Đọc JSON ---
+    @Override
+    public void parse(JsonObject obj) throws Exception {
+        if (obj == null) return;
+
+        this.userId = obj.has("userId") ? obj.get("userId").getAsString() : null;
+        this.userName = obj.has("userName") ? obj.get("userName").getAsString() : null;
+        this.password = obj.has("password") ? obj.get("password").getAsString() : null;
+        this.email = obj.has("email") ? obj.get("email").getAsString() : null;
+        this.fullName = obj.has("fullName") ? obj.get("fullName").getAsString() : null;
+
+        if (obj.has("createAt") && !obj.get("createAt").getAsString().isEmpty()) {
+            this.createAt = LocalDateTime.parse(obj.get("createAt").getAsString(), FORMATTER);
+        } else {
+            this.createAt = null;
+        }
+    }
+}

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="root" prefHeight="1106.0" prefWidth="1157.0" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductDetailController">
+   <top>
+      <BorderPane prefHeight="100" style="-fx-background-color: #63C8FF;" styleClass="header-bar" BorderPane.alignment="CENTER">
+         <left>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="logo-image">
+               <image>
+                  <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets top="15.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </left>
+         <center>
+            <TextField maxWidth="600" promptText="Tìm kiếm..." styleClass="search-bar" />
+         </center>
+         <right>
+            <HBox alignment="CENTER_RIGHT" spacing="16">
+               <children>
+                  <Button styleClass="notify-btn" text="Thông báo" />
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar-image">
+                     <image>
+                        <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </right>
+      </BorderPane>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" spacing="32.0" style="-fx-background-color: #63C8FF;" styleClass="footer-bar" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="footer-logo">
+                     <image>
+                        <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                     </image></ImageView>
+                  <Label styleClass="footer-label" text="Địa chỉ" />
+                  <Label styleClass="footer-label" text="Số điện thoại" />
+                  <Label styleClass="footer-label" text="Gmail" />
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" spacing="8" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="footer-title" text="Quy định" />
+                  <Label styleClass="footer-label" text="Hướng dẫn tân thủ" />
+                  <Label styleClass="footer-label" text="Quy chế hoạt động" />
+                  <Label styleClass="footer-label" text="Cách thức thanh toán" />
+               </children>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" spacing="8" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="footer-title" text="Chính sách" />
+                  <Label styleClass="footer-label" text="Quy định" />
+                  <Label styleClass="footer-label" text="Chăm sóc khách hàng" />
+                  <Label styleClass="footer-label" text="Chính sách bảo mật" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" layoutX="422.0" layoutY="35.0" spacing="8">
+               <children>
+                  <Label styleClass="footer-title" text="Liên kết nhanh" />
+                  <Label styleClass="footer-label" text="Trang chủ" />
+                  <Label styleClass="footer-label" text="Thông báo" />
+                  <Label styleClass="footer-label" text="Tin tức" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="8" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="119.0" prefWidth="58.0" styleClass="footer-label" text="Đầu trang" textAlignment="CENTER" />
+               </children>
+               <HBox.margin>
+                  <Insets right="20.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="826.0" prefWidth="280.0" HBox.hgrow="ALWAYS" />
+            <VBox fx:id="centerBox" alignment="TOP_CENTER" maxWidth="Infinity" prefHeight="400.0" prefWidth="900.0" spacing="24.0" styleClass="content-box">
+               <children>
+                  <HBox prefHeight="54.0" prefWidth="614.0">
+                     <children>
+                        <Label text=" Trang chủ &gt; " />
+                        <Label text="Sân bóng &gt;" />
+                        <Label text="Xem chi tiết sân bóng" textFill="RED" />
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="685.0" styleClass="title-label" text="Thông tin sân bóng" textAlignment="CENTER" VBox.vgrow="NEVER" />
+                  <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="512.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="193.0" fitWidth="376.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowSpan="6">
+                           <image>
+                              <Image url="@../images/background.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="70.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6" GridPane.rowSpan="2">
+                           <image>
+                              <Image url="@../images/background.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="70.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.rowSpan="2">
+                           <image>
+                              <Image url="@../images/background.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="70.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.rowSpan="2">
+                           <image>
+                              <Image url="@../images/background.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="70.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6" GridPane.rowSpan="2">
+                           <image>
+                              <Image url="@../images/background.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <GridPane alignment="CENTER" styleClass="info-grid" VBox.vgrow="NEVER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label styleClass="info-label" text="Tên sân : " GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                        <Text fx:id="txt_nameYard" fill="#222" text="Text" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="0" />
+                        <Label styleClass="info-label" text="Trạng thái : " GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                        <Text fx:id="txt_yardStatus" fill="#222" text="Text" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="0" />
+                        <Label styleClass="info-label" text="Loại sân : " GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Text fx:id="txt_yardType" fill="#222" text="Text" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                        <Label styleClass="info-label" text="Mô tả : " GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Text fx:id="txt_descriptionYard" fill="#222" text="Text" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                        <Label styleClass="info-label" text="Vị trí : " GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <Text fx:id="txt_addressYard" fill="#222" text="Text" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                        <Label styleClass="info-label" text="Mặt sân" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                        <Text fx:id="txt_yardSurfaceType" fill="#222" text="Text" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <Button fx:id="btn_ordeYard" mnemonicParsing="false" prefHeight="46.0" prefWidth="654.0" styleClass="main-button" text="Đặt Sân" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <Region prefHeight="826.0" prefWidth="280.0" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

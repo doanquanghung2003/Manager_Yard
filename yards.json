@@ -1,0 +1,38 @@
+[
+  {
+    "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
+    "yardName": "sab3",
+    "yardType": "SEVEN_A_SIDE",
+    "yardPrice": 3432432.0,
+    "yardDescription": "sda",
+    "yardThumbnail": "3",
+    "yardImages": [
+      "ư"
+    ],
+    "yardAddress": "ssd",
+    "yardStatus": "active",
+    "isAvailable": true,
+    "createAt": "2025-07-14 16:52",
+    "updateAt": "2025-07-14 16:52",
+    "maintenanceSlots": [],
+    "eventSlots": []
+  },
+  {
+    "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
+    "yardName": "san 2",
+    "yardType": "FIVE_A_SIDE",
+    "yardPrice": 3434324.0,
+    "yardDescription": "sd",
+    "yardThumbnail": "s",
+    "yardImages": [
+      "ư"
+    ],
+    "yardAddress": "sda",
+    "yardStatus": "active",
+    "isAvailable": true,
+    "createAt": "2025-07-15 16:00",
+    "updateAt": "2025-07-15 16:00",
+    "maintenanceSlots": [],
+    "eventSlots": []
+  }
+]

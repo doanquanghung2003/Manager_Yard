@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="600" prefWidth="900" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <BorderPane prefHeight="100" style="-fx-background-color: #63C8FF;" styleClass="header-bar">
+            <left>
+                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="logo-image">
+                    <image>
+                        <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                    </image>
+                </ImageView>
+            </left>
+            <center>
+                <TextField maxWidth="600" promptText="Tìm kiếm..." styleClass="search-bar" />
+            </center>
+            <right>
+                <HBox alignment="CENTER_RIGHT" spacing="16">
+                    <children>
+                        <Button styleClass="notify-btn" text="Thông báo" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar-image">
+                            <image>
+                                <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </right>
+        </BorderPane>
+    </top>
+    <center>
+        <HBox alignment="CENTER" spacing="32.0">
+            <children>
+                <Region prefWidth="200" />
+                <VBox alignment="CENTER" maxWidth="400" spacing="20" styleClass="content-box">
+                    <children>
+                        <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" styleClass="logo-image">
+                            <image>
+                                <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                            </image>
+                        </ImageView>
+                        <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2196F3;" text="Đăng nhập hệ thống" />
+                        <TextField fx:id="tft_username" promptText="Tên đăng nhập" styleClass="text-field" />
+                  <Text fx:id="txt_usernameError" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <PasswordField fx:id="tft_password" promptText="Mật khẩu" styleClass="password-field" />
+                  <Text fx:id="txt_passwordError" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 0 0 0 0;">
+                            <children>
+                                <CheckBox fx:id="rememberMeCheckBox" text="Lưu mật khẩu" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Hyperlink fx:id="forgotPasswordLink" style="-fx-text-fill: #1976D2;" text="Quên mật khẩu?" />
+                            </children>
+                        </HBox>
+                        <Button fx:id="btn_login" styleClass="login-btn" text="Đăng nhập" />
+                  <Text fx:id="txt_loginError" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Label alignment="CENTER" style="-fx-text-fill: #888;" text="Hoặc đăng nhập bằng" />
+                        <HBox alignment="CENTER" spacing="16">
+                            <children>
+                                <Button fx:id="btn_googleLogin" styleClass="social-btn google-btn">
+                                    <graphic>
+                                        <ImageView fitHeight="20" fitWidth="20">
+                                            <image>
+                                                <Image url="@../images/google.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <text>Google</text>
+                                </Button>
+                                <Button fx:id="btn_facebookLogin" styleClass="social-btn facebook-btn">
+                                    <graphic>
+                                        <ImageView fitHeight="20" fitWidth="20">
+                                            <image>
+                                                <Image url="@../images/facebook.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                    <text>Facebook</text>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="5">
+                            <children>
+                                <Label text="Chưa có tài khoản?" />
+                                <Hyperlink fx:id="hl_registerLink" style="-fx-text-fill: #1976D2;" text="Tạo tài khoản" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <Region prefWidth="200" />
+            </children>
+        </HBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" spacing="32.0" style="-fx-background-color: #63C8FF;" styleClass="footer-bar">
+            <children>
+                <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" styleClass="footer-logo">
+                            <image>
+                                <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                            </image>
+                        </ImageView>
+                        <Label styleClass="footer-label" text="Địa chỉ" />
+                        <Label styleClass="footer-label" text="Số điện thoại" />
+                        <Label styleClass="footer-label" text="Gmail" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
