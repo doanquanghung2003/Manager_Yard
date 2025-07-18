@@ -56,8 +56,14 @@ public class YardController implements BaseController {
         handleShowAllYards();
     }
 
+    private LayoutClientController mainLayoutController;
+    public void setMainLayoutController(LayoutClientController controller) {
+        this.mainLayoutController = controller;
+    }
+
     	public void initialize() {
 		DuLieu.getInstance().loadYardsFromFile("yards.json");
+		handleShowAllYards(); // hoặc constructorView()
 		setOnAction();
 		refresh();
 
@@ -224,17 +230,11 @@ public class YardController implements BaseController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/DetailProduct.fxml"));
             Parent detailRoot = loader.load();
-
             ProductDetailController detailController = loader.getController();
             detailController.setYard(yd);
 
-            // Lấy VBox/HBox vùng center của DetailProduct.fxml
-            BorderPane detailBorderPane = (BorderPane) detailRoot;
-            Node detailContent = detailBorderPane.getCenter(); // Đây là HBox
-
-            if (mainBorderPane != null && detailContent != null) {
-                mainBorderPane.setCenter(detailContent);
-            }
+            // Lấy LayoutClientController từ context hoặc truyền vào
+            mainLayoutController.setContent(detailRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }

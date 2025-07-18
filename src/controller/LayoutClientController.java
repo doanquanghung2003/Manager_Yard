@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
+import controller.YardController;
 
 public class LayoutClientController {
     @FXML
@@ -23,6 +24,11 @@ public class LayoutClientController {
     @FXML private ComboBox<String> districtCombo;
     @FXML private Button searchBtn;
     @FXML private TextField searchBar;
+
+    private LayoutClientController mainLayoutController;
+    public void setMainLayoutController(LayoutClientController controller) {
+        this.mainLayoutController = controller;
+    }
 
     @FXML
     public void initialize() {
@@ -72,17 +78,19 @@ public class LayoutClientController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/ProductsLayout.fxml"));
             Parent productRoot = loader.load();
-            controller.YardController yardController = loader.getController();
-            if (productRoot instanceof StackPane) {
-                StackPane stackPane = (StackPane) productRoot;
-                for (Node node : stackPane.getChildren()) {
-                    if (node instanceof BorderPane) {
-                        yardController.setMainBorderPane((BorderPane) node);
-                        break;
-                    }
-                }
-            }
+            YardController yardController = loader.getController();
+            yardController.setMainLayoutController(this); // 'this' là LayoutClientController hiện tại
             setContent(productRoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showCheckoutPage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/Checkout.fxml"));
+            Parent checkoutPage = loader.load();
+            setContent(checkoutPage);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -18,7 +18,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="center-bg" BorderPane.alignment="CENTER">
          <children>
             <Region prefHeight="826.0" prefWidth="280.0" HBox.hgrow="ALWAYS" />
-            <VBox fx:id="centerBox" alignment="TOP_CENTER" maxWidth="Infinity" prefHeight="400.0" prefWidth="900.0" spacing="24.0" styleClass="content-box center-bg detail-text-white">
+            <VBox fx:id="centerBox" alignment="TOP_CENTER" maxWidth="Infinity" prefHeight="1106.0" prefWidth="1394.0" spacing="24.0" styleClass="content-box center-bg detail-text-white">
                <children>
                   <HBox prefHeight="54.0" prefWidth="614.0">
                      <children>
