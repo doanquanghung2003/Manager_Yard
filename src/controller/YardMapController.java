@@ -149,7 +149,7 @@ public class YardMapController implements Initializable {
                         btn.setPrefSize(cellWidth * span, cellHeight);
                         btn.setStyle("-fx-background-color: linear-gradient(#FF0000, #CC0000); -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: #900;");
                         // Tooltip thông tin booking
-                        String tooltipText = "Khách: " + booking.getCustomerName() + "\nSĐT: " + booking.getCustomerPhone()
+                        String tooltipText = "Khách: " + booking.getBookerName() + "\nSĐT: " + booking.getBookerPhone()
                                 + "\nGiờ: " + timeLabel;
                         Tooltip.install(btn, new Tooltip(tooltipText));
                         
@@ -320,8 +320,8 @@ public class YardMapController implements Initializable {
         alert.setTitle("Thông tin đặt sân");
         alert.setHeaderText("Thông tin đặt sân");
         StringBuilder content = new StringBuilder();
-        content.append("Khách: ").append(booking.getCustomerName()).append("\n");
-        content.append("SĐT: ").append(booking.getCustomerPhone()).append("\n");
+        content.append("Khách: ").append(booking.getBookerName()).append("\n");
+        content.append("SĐT: ").append(booking.getBookerPhone()).append("\n");
         content.append("Giờ: ")
                .append(bookingRange.getStartTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")))
                .append(" - ")

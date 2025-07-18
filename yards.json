@@ -5,9 +5,10 @@
     "yardType": "SEVEN_A_SIDE",
     "yardPrice": 3432432.0,
     "yardDescription": "sda",
-    "yardThumbnail": "3",
+    "yardThumbnail": "D:\\Duan\\Manager_Yard\\src\\images\\1752807385490_HaruPet-Photoroom.png",
     "yardImages": [
-      "ư"
+      "ư",
+      "src\\images\\1752811300797_Screenshot 2025-07-15 110702.png"
     ],
     "yardAddress": "ssd",
     "yardStatus": "active",
@@ -18,20 +19,16 @@
     "eventSlots": []
   },
   {
-    "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
-    "yardName": "san 2",
-    "yardType": "FIVE_A_SIDE",
-    "yardPrice": 3434324.0,
-    "yardDescription": "sd",
-    "yardThumbnail": "s",
-    "yardImages": [
-      "ư"
-    ],
-    "yardAddress": "sda",
+    "yardId": "67137219-e328-440d-92d6-7e7881e5092d",
+    "yardName": "Sân bóng đá",
+    "yardPrice": 200000.0,
+    "yardThumbnail": "D:\\Duan\\Manager_Yard\\src\\images\\1752808577071_HaruPet-Photoroom.png",
+    "yardImages": [],
+    "yardAddress": "Băc từ niên",
     "yardStatus": "active",
     "isAvailable": true,
-    "createAt": "2025-07-15 16:00",
-    "updateAt": "2025-07-15 16:00",
+    "createAt": "2025-07-18 10:16",
+    "updateAt": "2025-07-18 10:16",
     "maintenanceSlots": [],
     "eventSlots": []
   }
