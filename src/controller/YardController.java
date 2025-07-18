@@ -51,9 +51,8 @@ public class YardController implements BaseController {
     private LocalDateTime updateAt;
 
     private BorderPane mainBorderPane;
-    public void setMainBorderPane(BorderPane pane) {
-        this.mainBorderPane = pane;
-        handleShowAllYards();
+    public void setMainBorderPane(BorderPane mainBorderPane) {
+        this.mainBorderPane = mainBorderPane;
     }
 
     private LayoutClientController mainLayoutController;
@@ -190,15 +189,22 @@ public class YardController implements BaseController {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlclient/Checkout.fxml"));
-            Parent root = loader.load();
+            Parent checkout = loader.load();
 
             BookingController controller = loader.getController();
             controller.setSelectedYards(new ArrayList<>(selectedYards));
+            controller.setMainLayoutController(mainLayoutController); // Truyền controller cha
 
-            Stage stage = new Stage();
-            stage.setTitle("Đặt sân");
-            stage.setScene(new Scene(root));
-            stage.show();
+            // Chuyển trang qua LayoutClientController
+            if (mainLayoutController != null) {
+                mainLayoutController.setContent(checkout);
+            } else {
+                // fallback: vẫn mở stage mới nếu không có controller cha (tránh lỗi trắng màn hình)
+                Stage stage = new Stage();
+                stage.setTitle("Đặt sân");
+                stage.setScene(new Scene(checkout));
+                stage.show();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

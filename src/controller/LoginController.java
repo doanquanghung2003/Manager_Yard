@@ -12,6 +12,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import utils.UserService;
+import bean.UserModel;
+import java.time.LocalDateTime;
 
 public class LoginController implements BaseController {
 
@@ -48,7 +51,8 @@ public class LoginController implements BaseController {
 	    private TextField tft_username;
 
 	public void initialize() {
-		
+		btn_login.setOnAction(e -> handleLogin());
+		hl_registerLink.setOnAction(e -> openRegisterView());
 	}
 	    
 	@Override
@@ -58,7 +62,7 @@ public class LoginController implements BaseController {
 	}
 	private void openRegisterView() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlclient/Register.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/Register.fxml"));
 			Parent root = loader.load();
 
 			Scene scene = new Scene(root);
@@ -90,6 +94,43 @@ public class LoginController implements BaseController {
 	public void refresh() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	private void handleLogin() {
+		String username = tft_username.getText().trim();
+		String password = tft_password.getText();
+
+		txt_usernameError.setText("");
+		txt_passwordError.setText("");
+		txt_loginError.setText("");
+
+		if (username.isEmpty()) {
+			txt_usernameError.setText("Không được để trống");
+			return;
+		}
+		if (password.isEmpty()) {
+			txt_passwordError.setText("Không được để trống");
+			return;
+		}
+		if (UserService.checkLogin(username, password)) {
+			// Đăng nhập thành công, chuyển sang giao diện chính
+			openMainView();
+		} else {
+			txt_loginError.setText("Sai tài khoản hoặc mật khẩu");
+		}
+	}
+
+	private void openMainView() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/mainLayout/LayoutClient.fxml"));
+			Parent root = loader.load();
+			Stage stage = (Stage) btn_login.getScene().getWindow();
+			stage.setScene(new Scene(root));
+			stage.setTitle("Trang chủ");
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
  
 }

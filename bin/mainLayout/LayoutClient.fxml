@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainLayout" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LayoutClientController" stylesheets="@../application/application.css">
+<BorderPane fx:id="mainLayout" stylesheets="@../application/application.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.LayoutClientController">
     <top>
         <VBox alignment="TOP_CENTER">
             <!-- Header -->
@@ -32,8 +33,16 @@
                 <right>
                     <HBox alignment="CENTER_RIGHT" spacing="16">
                         <children>
-                            <Button fx:id="userInfoBtn" styleClass="main-btn" text="Quản lý thông tin" />
-                            <Button fx:id="logoutBtn" styleClass="main-btn" text="Đăng xuất" />
+                            <Button fx:id="userInfoBtn" styleClass="main-btn" text="Thông báo" />
+                            <MenuButton fx:id="avatarMenuBtn" styleClass="avatar-menu-btn">
+                                <graphic>
+                                    <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../images/profile.png" />
+                                        </image>
+                                    </ImageView>
+                                </graphic>
+                            </MenuButton>
                         </children>
                     </HBox>
                 </right>
@@ -70,10 +79,10 @@
         </VBox>
     </top>
     <center>
-        <StackPane fx:id="contentPane"/>
+        <StackPane fx:id="contentPane" />
     </center>
     <bottom>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" styleClass="footer-bar">
+        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="footer-bar" BorderPane.alignment="CENTER">
             <children>
                 <VBox alignment="CENTER_LEFT" prefHeight="110.0" prefWidth="150.0" spacing="5.0" HBox.hgrow="ALWAYS">
                     <children>
@@ -128,4 +137,3 @@
         </HBox>
     </bottom>
 </BorderPane>
-

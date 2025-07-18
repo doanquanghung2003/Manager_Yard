@@ -24,6 +24,9 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.event.ActionEvent;
+import controller.LayoutClientController;
 
 public class BookingController implements BaseController {
 
@@ -35,6 +38,11 @@ public class BookingController implements BaseController {
 
     // Thêm biến để lưu dịch vụ đã chọn
     private Map<String, ServicesModel> selectedServicesPerYard = new HashMap<>();
+
+    private LayoutClientController mainLayoutController;
+    public void setMainLayoutController(LayoutClientController controller) {
+        this.mainLayoutController = controller;
+    }
 
     @FXML private Button btn_addAll;
     @FXML private Button btn_chooseTime;
@@ -63,6 +71,7 @@ public class BookingController implements BaseController {
     @FXML private TableColumn<ServicesModel, Number> colServicePrice;
     @FXML private TableView<YardInfoRow> tbl_confirmedYards;
     @FXML private Label lblTotalAmount;
+    @FXML private BorderPane mainBorderPane; // BorderPane của giao diện chính
 
     public void initialize() {
         // Load data from files
@@ -72,15 +81,6 @@ public class BookingController implements BaseController {
         setOnAction();
         refresh();
 
-        // Debug FXML injection
-        System.out.println("rb_aboutDay: " + rb_aboutDay);
-        System.out.println("rb_weekDay: " + rb_weekDay);
-        System.out.println("tbl_infoYard: " + tbl_infoYard);
-        System.out.println("tbl_services: " + tbl_services);
-        System.out.println("tbl_payment: " + tbl_payment);
-        System.out.println("colServiceName: " + colServiceName);
-        System.out.println("colServiceDesc: " + colServiceDesc);
-        System.out.println("colServicePrice: " + colServicePrice);
 
         // Configure tbl_infoYard columns
         if (tbl_infoYard != null) {
