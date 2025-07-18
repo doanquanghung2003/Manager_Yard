@@ -28,6 +28,7 @@ import bean.DepositModel;
 import java.util.ArrayList;
 import bean.PaymentRecord;
 import bean.PaymentStatus;
+import javafx.scene.layout.AnchorPane;
 
 public class BookingController implements BaseController {
 
@@ -69,6 +70,7 @@ public class BookingController implements BaseController {
     @FXML private TableColumn<ServicesModel, Number> colServicePrice;
     @FXML private TableView<YardInfoRow> tbl_confirmedYards;
     @FXML private Label lblTotalAmount;
+    @FXML private AnchorPane yardMapContainer;
 
     public void initialize() {
         // Load data from files
@@ -350,6 +352,24 @@ public class BookingController implements BaseController {
         // Add listener for radio buttons
         if (rb_weekDay != null) rb_weekDay.selectedProperty().addListener((obs, oldVal, newVal) -> updateTimesTable());
         if (rb_aboutDay != null) rb_aboutDay.selectedProperty().addListener((obs, oldVal, newVal) -> updateTimesTable());
+
+        // Sau khi các bảng đã setup xong, load sơ đồ sân vào container
+        loadYardMapView();
+    }
+
+    private void loadYardMapView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlManager/YardMap.fxml"));
+            AnchorPane yardMapPane = loader.load();
+            yardMapContainer.getChildren().clear();
+            yardMapContainer.getChildren().add(yardMapPane);
+            AnchorPane.setTopAnchor(yardMapPane, 0.0);
+            AnchorPane.setBottomAnchor(yardMapPane, 0.0);
+            AnchorPane.setLeftAnchor(yardMapPane, 0.0);
+            AnchorPane.setRightAnchor(yardMapPane, 0.0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateTimesTable() {

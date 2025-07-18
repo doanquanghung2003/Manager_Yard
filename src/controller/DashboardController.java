@@ -328,7 +328,7 @@ public class DashboardController implements BaseController {
         singleton.DuLieu.getInstance().saveYardToFile("yards.json");
     }
 
-    // ==================== BOOKINGS MANAGEMENT ====================
+   
 
     private void showBookingsTableInContent() {
         if (contentPane != null) {
@@ -344,12 +344,9 @@ public class DashboardController implements BaseController {
 
     private void logBookingData(List<BookingModel> bookings) {
         if (bookings != null && !bookings.isEmpty()) {
-            System.out.println("=== DEBUG: Tổng số booking: " + bookings.size() + " ===");
+        
             for (int i = 0; i < bookings.size(); i++) {
                 BookingModel booking = bookings.get(i);
-                System.out.println("Booking " + (i+1) + ": " + booking.getBookerName() + " - " + booking.getBookingId());
-                System.out.println("  - Payment Status: " + booking.getCalculatedPaymentStatus());
-                System.out.println("  - Payments count: " + (booking.getPayments() != null ? booking.getPayments().size() : 0));
             }
         } else {
             System.out.println("Không có booking nào được load!");
@@ -364,7 +361,7 @@ public class DashboardController implements BaseController {
             createBookingTimeColumn(),
             createYardsColumn(),
             createServicesColumn(),
-            createDepositColumn(), // Sử dụng cột deposit mới
+            createDepositColumn(), 
             createTotalAmountColumn(),
             createPaymentStatusColumn(),
             createPaymentTimeColumn()
@@ -583,7 +580,7 @@ public class DashboardController implements BaseController {
         );
     }
 
-    // ==================== STATS & OTHER VIEWS ====================
+  
 
     private void showStatsInContent() {
         VBox statsBox = new VBox(10);

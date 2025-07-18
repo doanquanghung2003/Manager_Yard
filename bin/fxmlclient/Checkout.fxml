@@ -101,6 +101,8 @@
                     <!-- Thêm TableView mới ở trên hai bảng dưới -->
                     <Label alignment="CENTER" styleClass="home-title" text="Bảng thông tin" />
                     <TableView fx:id="tbl_infoYard" prefWidth="1100" styleClass="product-card" />
+                    <!-- Sơ đồ sân đặt ở đây -->
+                    <AnchorPane fx:id="yardMapContainer" prefHeight="400.0" prefWidth="1100.0" />
                     <!-- Hai bảng song song -->
                     <HBox alignment="CENTER" spacing="20" VBox.vgrow="ALWAYS">
                         <!-- Bảng Saved Schedules -->
