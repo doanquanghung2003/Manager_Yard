@@ -9,7 +9,6 @@ public class ServicesModel implements Bean {
     private double servicePrice;
    
 
-  
     public ServicesModel() {
 		
 	}

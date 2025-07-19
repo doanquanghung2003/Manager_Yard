@@ -14,7 +14,7 @@ public class Main extends Application {
 			Parent mainRoot = mainLoader.load();
 			controller.LayoutClientController mainController = mainLoader.getController();
 
-			FXMLLoader pageLoader = new FXMLLoader(getClass().getResource("/fxmlClient/Home.fxml"));
+			FXMLLoader pageLoader = new FXMLLoader(getClass().getResource("/fxmlManager/Dashboard.fxml"));
 			Parent homePage = pageLoader.load();
 
 			mainController.setContent(homePage);

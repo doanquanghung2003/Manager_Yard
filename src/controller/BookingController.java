@@ -24,9 +24,17 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+
+import bean.DepositModel;
+import java.util.ArrayList;
+import bean.PaymentRecord;
+import bean.PaymentStatus;
+import javafx.scene.layout.AnchorPane;
+
 import javafx.scene.layout.BorderPane;
 import javafx.event.ActionEvent;
 import controller.LayoutClientController;
+
 
 public class BookingController implements BaseController {
 
@@ -34,15 +42,19 @@ public class BookingController implements BaseController {
 
     private List<YardModel> selectedYards = new ArrayList<>();
     private Map<YardModel, List<String>> selectedSlotsPerYard = new HashMap<>();
-    private Map<YardModel, LocalDate> selectedDatesPerYard = new HashMap<>(); // Thêm Map lưu ngày riêng cho từng sân
+    private Map<YardModel, LocalDate> selectedDatesPerYard = new HashMap<>(); 
 
     // Thêm biến để lưu dịch vụ đã chọn
     private Map<String, ServicesModel> selectedServicesPerYard = new HashMap<>();
+
+
+    private List<PaymentRecord> payments = new ArrayList<>();
 
     private LayoutClientController mainLayoutController;
     public void setMainLayoutController(LayoutClientController controller) {
         this.mainLayoutController = controller;
     }
+
 
     @FXML private Button btn_addAll;
     @FXML private Button btn_chooseTime;
@@ -71,12 +83,14 @@ public class BookingController implements BaseController {
     @FXML private TableColumn<ServicesModel, Number> colServicePrice;
     @FXML private TableView<YardInfoRow> tbl_confirmedYards;
     @FXML private Label lblTotalAmount;
-    @FXML private BorderPane mainBorderPane; // BorderPane của giao diện chính
+
+    @FXML private BorderPane mainBorderPane; 
+
 
     public void initialize() {
         // Load data from files
-        DuLieu.getInstance().loadBookingsFromFile("bookings.json");
-        DuLieu.getInstance().loadServicesFromFile("services.json");
+        DuLieu.getInstance().loadBookingsFromFile("data/bookings.json");
+        DuLieu.getInstance().loadServicesFromFile("data/services.json");
         constructorView();
         setOnAction();
         refresh();
@@ -223,6 +237,7 @@ public class BookingController implements BaseController {
             }
             // Load all services into tbl_services
             tbl_services.setItems(FXCollections.observableArrayList(DuLieu.getInstance().getServices()));
+            tbl_services.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         } else {
             System.out.println("Warning: tbl_services is not initialized.");
             showAlert("Lỗi", "Bảng dịch vụ không được khởi tạo.");
@@ -306,10 +321,10 @@ public class BookingController implements BaseController {
             sttCol.setCellValueFactory(cell -> new SimpleStringProperty(String.valueOf(tbl_times.getItems().indexOf(cell.getValue()) + 1)));
 
             TableColumn<BookingModel, String> dayOfWeekCol = new TableColumn<>("Thứ");
-            dayOfWeekCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCustomerPhone()));
+            dayOfWeekCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBookerPhone()));
 
             TableColumn<BookingModel, String> dateCol = new TableColumn<>("Ngày");
-            dateCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCustomerName()));
+            dateCol.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getBookerName()));
 
             TableColumn<BookingModel, Void> actionCol = new TableColumn<>("Action");
             actionCol.setCellFactory(tc -> new TableCell<BookingModel, Void>() {
@@ -317,7 +332,7 @@ public class BookingController implements BaseController {
                 {
                     btnCancel.setOnAction(e -> {
                         BookingModel booking = getTableView().getItems().get(getIndex());
-                        System.out.println("Cancel booking: " + booking.getCustomerName());
+                        System.out.println("Cancel booking: " + booking.getBookerName());
                         tbl_times.getItems().remove(getIndex());
                     });
                 }
@@ -343,7 +358,26 @@ public class BookingController implements BaseController {
         // Add listener for radio buttons
         if (rb_weekDay != null) rb_weekDay.selectedProperty().addListener((obs, oldVal, newVal) -> updateTimesTable());
         if (rb_aboutDay != null) rb_aboutDay.selectedProperty().addListener((obs, oldVal, newVal) -> updateTimesTable());
+
+        // Sau khi các bảng đã setup xong, load sơ đồ sân vào container
+        // loadYardMapView(); // Xoá lời gọi này
     }
+
+    // Xoá hàm loadYardMapView
+    // private void loadYardMapView() {
+    //     try {
+    //         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlManager/YardMap.fxml"));
+    //         AnchorPane yardMapPane = loader.load();
+    //         yardMapContainer.getChildren().clear();
+    //         yardMapContainer.getChildren().add(yardMapPane);
+    //         AnchorPane.setTopAnchor(yardMapPane, 0.0);
+    //         AnchorPane.setBottomAnchor(yardMapPane, 0.0);
+    //         AnchorPane.setLeftAnchor(yardMapPane, 0.0);
+    //         AnchorPane.setRightAnchor(yardMapPane, 0.0);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     private void updateTimesTable() {
         if (tbl_times != null) {
@@ -370,11 +404,11 @@ public class BookingController implements BaseController {
                 // Create dummy booking list for time information display
                 for (LocalDate date : validDates) {
                     BookingModel timeInfo = new BookingModel();
-                    timeInfo.setCustomerName("Ngày: " + date.toString());
-                    timeInfo.setCustomerPhone("Thứ: " + date.getDayOfWeek().toString());
+                    timeInfo.setBookerName("Ngày: " + date.toString());
+                    timeInfo.setBookerPhone("Thứ: " + date.getDayOfWeek().toString());
                     timeInfo.setBookingTime(LocalDateTime.of(date, LocalTime.of(0, 0)));
                     timeInfo.setTotalAmount(0);
-                    timeInfo.setPaymentStatus(PaymentStatus.DEPOSITED);
+                    // Payment status sẽ được tính từ payments
                     filteredBookings.add(timeInfo);
                 }
             } else {
@@ -770,10 +804,10 @@ public class BookingController implements BaseController {
     }
 
     public void handleNewBooking() {
-        String customerName = tft_fullName != null ? tft_fullName.getText() : "";
-        String customerPhone = ttf_phone != null ? ttf_phone.getText() : "";
+        String bookerName = tft_fullName != null ? tft_fullName.getText() : "";
+        String bookerPhone = ttf_phone != null ? ttf_phone.getText() : "";
         LocalDateTime bookingTime = LocalDateTime.now();
-        if (customerName.isEmpty() || customerPhone.isEmpty()) {
+        if (bookerName.isEmpty() || bookerPhone.isEmpty()) {
             showAlert("Thông báo", "Vui lòng nhập họ tên và số điện thoại.");
             return;
         }
@@ -826,9 +860,13 @@ public class BookingController implements BaseController {
             bookingYards.add(new BookingYardModel(yard.getYardId(), yardSlots));
         }
 
-        ServicesModel selectedService = tbl_services != null ? tbl_services.getSelectionModel().getSelectedItem() : null;
+        List<ServicesModel> selectedServices = tbl_services != null ? tbl_services.getSelectionModel().getSelectedItems() : new ArrayList<>();
         List<String> selectedServiceIds = new ArrayList<>();
-        if (selectedService != null) selectedServiceIds.add(selectedService.getServiceId());
+        if (selectedServices != null) {
+            for (ServicesModel service : selectedServices) {
+                selectedServiceIds.add(service.getServiceId());
+            }
+        }
 
         double totalAmount = 0;
         for (BookingYardModel by : bookingYards) {
@@ -839,30 +877,37 @@ public class BookingController implements BaseController {
             }
         }
 
-        totalAmount += selectedService != null ? selectedService.getPrice() : 0;
+        totalAmount += selectedServices.stream().mapToDouble(ServicesModel::getPrice).sum();
         if (lblTotalAmount != null) {
             lblTotalAmount.setText(String.format("%.2f", totalAmount));
         }
 
-        PaymentMethod paymentMethod = PaymentMethod.FULL_PAYMENT;
-        double depositAmount = totalAmount;
+        // Tạo payment record khi thanh toán
+        // TODO: Cho phép user chọn phương thức thanh toán từ UI
+        PaymentMethod selectedPaymentMethod = PaymentMethod.CASH; // Mặc định tiền mặt
+        PaymentRecord paymentRecord = new PaymentRecord(
+            totalAmount,
+            selectedPaymentMethod,
+            PaymentStatus.PAID,
+            LocalDateTime.now(),
+            "Thanh toán đủ"
+        );
+        payments.add(paymentRecord);
 
         BookingModel booking = new BookingModel(
                 UUID.randomUUID().toString(),
-                customerName,
-                customerPhone,
+                bookerName,
+                bookerPhone,
                 bookingTime,
-                depositAmount,
                 totalAmount,
-                paymentMethod.getStatus(),
-                LocalDateTime.now(),
-                selectedServiceIds
+                selectedServiceIds,
+                new ArrayList<>(payments)
         );
         booking.setBookingYards(bookingYards);
 
         DuLieu.getInstance().addBooking(booking);
-        DuLieu.getInstance().saveBookingToFile("bookings.json");
-        DuLieu.getInstance().saveYardToFile("yards.json");
+        DuLieu.getInstance().saveBookingToFile("data/data/bookings.json");
+        DuLieu.getInstance().saveYardToFile("data/data/yards.json");
 
         // Update tbl_payment with confirmed booking data
         if (tbl_payment != null) {
@@ -925,8 +970,8 @@ public class BookingController implements BaseController {
 
     @Override
     public void loadData() {
-        DuLieu.getInstance().loadBookingsFromFile("bookings.json");
-        DuLieu.getInstance().loadServicesFromFile("services.json");
+        DuLieu.getInstance().loadBookingsFromFile("data/bookings.json");
+        DuLieu.getInstance().loadServicesFromFile("data/services.json");
         if (tbl_services != null && (tbl_services.getColumns().isEmpty() || (colServiceName != null && colServiceDesc != null && colServicePrice != null))) {
             tbl_services.setItems(FXCollections.observableArrayList(DuLieu.getInstance().getServices()));
         }
@@ -944,6 +989,21 @@ public class BookingController implements BaseController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    // Thêm phương thức để thêm khoản thanh toán
+    private void addPayment(double amount, PaymentMethod method, PaymentStatus status, LocalDateTime time, String note) {
+        payments.add(new PaymentRecord(amount, method, status, time, note));
+    }
+    // Thêm phương thức để xóa khoản thanh toán
+    private void removePayment(int index) {
+        if (index >= 0 && index < payments.size()) payments.remove(index);
+    }
+    // Thêm phương thức để sửa khoản thanh toán
+    private void updatePayment(int index, double amount, PaymentMethod method, PaymentStatus status, LocalDateTime time, String note) {
+        if (index >= 0 && index < payments.size()) {
+            payments.set(index, new PaymentRecord(amount, method, status, time, note));
+        }
     }
 }
 

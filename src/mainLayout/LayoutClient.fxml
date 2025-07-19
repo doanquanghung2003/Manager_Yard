@@ -20,7 +20,7 @@
                 <left>
                     <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" styleClass="logo-image" BorderPane.alignment="CENTER">
                         <image>
-                            <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                            <Image url="@../images/home.png" />
                         </image>
                         <BorderPane.margin>
                             <Insets />
@@ -67,7 +67,7 @@
                     <Button styleClass="menu-btn">Giới thiệu</Button>
                     <Button styleClass="menu-btn">Chính sách</Button>
                     <Button styleClass="menu-btn">Điều khoản</Button>
-                    <Button styleClass="menu-btn">Dành cho chủ sân</Button>
+                    <Button fx:id="btn_stadiumOwner" styleClass="menu-btn">Dành cho chủ sân</Button>
                     <Button styleClass="menu-btn">Liên hệ</Button>
                     <Button styleClass="menu-btn">Vị trí</Button>
                     <Button styleClass="menu-btn">Ngôn ngữ</Button>
@@ -79,7 +79,7 @@
         </VBox>
     </top>
     <center>
-        <StackPane fx:id="contentPane" alignment="CENTER"/>
+        <StackPane fx:id="stp_contentPane" alignment="CENTER"/>
     </center>
     <bottom>
         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="footer-bar" BorderPane.alignment="CENTER">
@@ -88,7 +88,7 @@
                     <children>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                                <Image url="@../images/home.png" />
                             </image>
                         </ImageView>
                         <Label text="Địa chỉ" />
@@ -122,7 +122,7 @@
                     <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+                                <Image url="@../images/home.png" />
                             </image>
                         </ImageView>
                         <Label text="Bản quyền" />

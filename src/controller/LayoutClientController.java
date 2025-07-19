@@ -19,16 +19,10 @@ import javafx.event.ActionEvent;
 
 public class LayoutClientController {
     @FXML
-    private StackPane contentPane;
+    private StackPane stp_contentPane;
 
     @FXML private Button userInfoBtn;
-    @FXML private Button logoutBtn;
     @FXML private Button productListBtn;
-    @FXML private ComboBox<String> sportCombo;
-    @FXML private ComboBox<String> cityCombo;
-    @FXML private ComboBox<String> districtCombo;
-    @FXML private Button searchBtn;
-    @FXML private TextField searchBar;
     @FXML private MenuButton avatarMenuBtn;
     private UserModel currentUser = null; 
 
@@ -44,39 +38,17 @@ public class LayoutClientController {
 
     @FXML
     public void initialize() {
-        // Khởi tạo dữ liệu cho các ComboBox
-        if (sportCombo != null) sportCombo.getItems().addAll("Bóng đá", "Bóng chuyền", "Cầu lông", "Tennis");
-        if (cityCombo != null) cityCombo.getItems().addAll("Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng");
-        // districtCombo sẽ được cập nhật dựa trên cityCombo
-        if (cityCombo != null && districtCombo != null) {
-            cityCombo.setOnAction(event -> {
-                String selectedCity = cityCombo.getValue();
-                districtCombo.getItems().clear();
-                if ("Hà Nội".equals(selectedCity)) {
-                    districtCombo.getItems().addAll("Ba Đình", "Hoàn Kiếm", "Cầu Giấy");
-                } else if ("TP. Hồ Chí Minh".equals(selectedCity)) {
-                    districtCombo.getItems().addAll("Quận 1", "Quận 3", "Quận 7");
-                } else if ("Đà Nẵng".equals(selectedCity)) {
-                    districtCombo.getItems().addAll("Hải Châu", "Thanh Khê");
-                }
-            });
-        }
-        if (searchBtn != null) searchBtn.setOnAction(event -> handleSearch());
         if (userInfoBtn != null) userInfoBtn.setOnAction(event -> handleUserInfo());
-        if (logoutBtn != null) logoutBtn.setOnAction(event -> handleLogout());
         if (productListBtn != null) productListBtn.setOnAction(event -> openProductPage());
         updateAvatarMenu();
     }
 
     public void setContent(Node node) {
-        contentPane.getChildren().setAll(node);
+        stp_contentPane.getChildren().setAll(node);
     }
 
     private void handleSearch() {
-        String sport = sportCombo != null ? sportCombo.getValue() : null;
-        String city = cityCombo != null ? cityCombo.getValue() : null;
-        String district = districtCombo != null ? districtCombo.getValue() : null;
-        System.out.println("Tìm kiếm: " + sport + ", " + city + ", " + district);
+        System.out.println("Tìm kiếm");
     }
 
     private void handleUserInfo() {
@@ -90,7 +62,7 @@ public class LayoutClientController {
             Parent userInfo = loader.load();
             UserInfoController controller = loader.getController();
             controller.setUser(currentUser); // <-- Dòng này rất quan trọng!
-            contentPane.getChildren().setAll(userInfo);
+            stp_contentPane.getChildren().setAll(userInfo);
         } catch (IOException e) {
             e.printStackTrace();
         }

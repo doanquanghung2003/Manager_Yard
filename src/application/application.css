@@ -4,8 +4,8 @@
    .root {
     -fx-font-family: 'Segoe UI', Arial, sans-serif;
     -fx-background-color: transparent;
-    -fx-min-width: 0;
-    -fx-min-height: 0;
+    -fx-min-width: 0.0;
+    -fx-min-height: 0.0;
     -fx-background-image: url("../images/background.jpg");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
@@ -16,16 +16,16 @@
    Header & Footer
    ======================= */
 .header-bar {
-    -fx-background-color: linear-gradient(to right, #1976d2 70%, #43e97b 100%);
-    -fx-padding: 0 40px 0 40px;
+    -fx-background-color: linear-gradient(to right, #1976d2 70.0%, #43e97b 100.0%);
+    -fx-padding: 0.0 40.0px 0.0 40.0px;
 }
 .footer-bar {
-    -fx-background-color: linear-gradient(to right, #1976d2 70%, #43e97b 100%);
-    -fx-padding: 0 40px 0 40px;
+    -fx-background-color: linear-gradient(to right, #1976d2 70.0%, #43e97b 100.0%);
+    -fx-padding: 0.0 40.0px 0.0 40.0px;
 }
 .footer-label {
     -fx-text-fill: #fff;
-    -fx-font-size: 13px;
+    -fx-font-size: 13.0px;
 }
 .footer-bar Label, .footer-bar .label {
     -fx-text-fill: #fff;
@@ -35,18 +35,18 @@
    Logo & Ảnh đại diện
    ======================= */
 .logo-image, .footer-logo, .avatar-image {
-    -fx-effect: dropshadow(gaussian, rgba(25,118,210,0.18), 6, 0.2, 0, 2);
-    -fx-background-radius: 50%;
+    -fx-effect: dropshadow(gaussian, rgba(25.0,118.0,210.0,0.18), 6.0, 0.2, 0.0, 2.0);
+    -fx-background-radius: 50.0%;
 }
 
 /* =======================
    Content Box Home
    ======================= */
 .content-box-home {
-    -fx-background-color: rgba(255,255,255,0.85);
-    -fx-background-radius: 24;
-    -fx-padding: 40 40 40 40;
-    -fx-effect: dropshadow(gaussian, rgba(67,233,123,0.13), 20, 0.3, 0, 6);
+    -fx-background-color: rgba(255.0,255.0,255.0,0.85);
+    -fx-background-radius: 24.0;
+    -fx-padding: 40.0 40.0 40.0 40.0;
+    -fx-effect: dropshadow(gaussian, rgba(67.0,233.0,123.0,0.13), 20.0, 0.3, 0.0, 6.0);
     -fx-alignment: center;
 }
 
@@ -54,14 +54,14 @@
    Tiêu đề & Phụ đề Home
    ======================= */
 .home-title {
-    -fx-font-size: 28px;
+    -fx-font-size: 28.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #1976d2;
 }
 .home-subtitle {
-    -fx-font-size: 16px;
+    -fx-font-size: 16.0px;
     -fx-text-fill: #388e3c;
-    -fx-padding: 0 0 12 0;
+    -fx-padding: 0.0 0.0 12.0 0.0;
 }
 
 /* =======================
@@ -69,20 +69,20 @@
    ======================= */
 .menu-bar {
     -fx-background-color: #174081;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.09), 4, 0.1, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0.0,0.0,0.0,0.09), 4.0, 0.1, 0.0, 1.0);
 }
 .menu-btn {
     -fx-background-color: transparent;
     -fx-text-fill: #e0f7fa;
-    -fx-font-size: 15px;
+    -fx-font-size: 15.0px;
     -fx-font-weight: bold;
-    -fx-padding: 0 22 0 22;
+    -fx-padding: 0.0 22.0 0.0 22.0;
     -fx-cursor: hand;
-    -fx-background-radius: 0;
-    -fx-border-width: 0 0 3 0;
+    -fx-background-radius: 0.0;
+    -fx-border-width: 0.0 0.0 3.0 0.0;
     -fx-border-color: transparent;
     -fx-alignment: CENTER;
-    -fx-graphic-text-gap: 8;
+    -fx-graphic-text-gap: 8.0;
     -fx-effect: none;
     -fx-transition: all 0.2s;
 }
@@ -103,12 +103,12 @@
 .main-btn {
     -fx-background-color: linear-gradient(to right, #43e97b, #38f9d7);
     -fx-text-fill: #fff;
-    -fx-background-radius: 20;
-    -fx-font-size: 15px;
+    -fx-background-radius: 20.0;
+    -fx-font-size: 15.0px;
     -fx-font-weight: bold;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(67,233,123,0.08), 6, 0.2, 0, 2);
-    -fx-padding: 8 24 8 24;
+    -fx-effect: dropshadow(gaussian, rgba(67.0,233.0,123.0,0.08), 6.0, 0.2, 0.0, 2.0);
+    -fx-padding: 8.0 24.0 8.0 24.0;
 }
 .main-btn:hover {
     -fx-background-color: linear-gradient(to right, #ffd600, #43e97b);
@@ -121,27 +121,27 @@
 .text-field, .password-field {
     -fx-background-color: #f2fefb;
     -fx-border-color: #43e97b;
-    -fx-border-radius: 14;
-    -fx-background-radius: 14;
-    -fx-font-size: 15px;
-    -fx-padding: 10 14 10 14;
-    -fx-effect: dropshadow(gaussian, rgba(67,233,123,0.08), 2, 0.1, 0, 1);
+    -fx-border-radius: 14.0;
+    -fx-background-radius: 14.0;
+    -fx-font-size: 15.0px;
+    -fx-padding: 10.0 14.0 10.0 14.0;
+    -fx-effect: dropshadow(gaussian, rgba(67.0,233.0,123.0,0.08), 2.0, 0.1, 0.0, 1.0);
 }
 .text-field:focused, .password-field:focused {
     -fx-border-color: #1976d2;
     -fx-background-color: #fff;
-    -fx-effect: dropshadow(gaussian, #1976d2, 2, 0.1, 0, 1);
+    -fx-effect: dropshadow(gaussian, #1976d2, 2.0, 0.1, 0.0, 1.0);
 }
 
 /* =======================
    Label thông báo lỗi
    ======================= */
 .label {
-    -fx-font-size: 14px;
+    -fx-font-size: 14.0px;
 }
 .error-label, .label[style*="red"] {
     -fx-text-fill: #e53935;
-    -fx-font-size: 12px;
+    -fx-font-size: 12.0px;
 }
 
 /* =======================
@@ -149,7 +149,7 @@
    ======================= */
 .hyperlink {
     -fx-text-fill: #1976D2;
-    -fx-font-size: 14px;
+    -fx-font-size: 14.0px;
     -fx-underline: true;
     -fx-cursor: hand;
 }
@@ -168,7 +168,7 @@
 }
 .scroll-bar .thumb {
     -fx-background-color: #43e97b;
-    -fx-background-radius: 8;
+    -fx-background-radius: 8.0;
 }
 
 /* =======================
@@ -176,12 +176,12 @@
    ======================= */
 .social-btn {
     -fx-background-color: transparent;
-    -fx-border-width: 2;
-    -fx-border-radius: 20;
+    -fx-border-width: 2.0;
+    -fx-border-radius: 20.0;
     -fx-border-color: #db4437;
     -fx-text-fill: #db4437;
     -fx-font-weight: bold;
-    -fx-padding: 8 18 8 18;
+    -fx-padding: 8.0 18.0 8.0 18.0;
     -fx-cursor: hand;
 }
 .google-btn {
@@ -194,7 +194,7 @@
 }
 .social-btn:hover {
     -fx-background-color: #f5f5f5;
-    -fx-effect: dropshadow(gaussian, #43e97b, 2, 0.1, 0, 1);
+    -fx-effect: dropshadow(gaussian, #43e97b, 2.0, 0.1, 0.0, 1.0);
 }
 .social-btn:pressed, .social-btn:focused {
     -fx-background-color: transparent;
@@ -206,31 +206,31 @@
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-    -fx-background-color: rgba(255,255,255,0.72);
+    -fx-background-color: rgba(255.0,255.0,255.0,0.72);
 }
 
 /* Khu vực tìm kiếm thể thao */
 .search-section {
-    -fx-background-color: rgba(255,255,255,0.98);
-    -fx-background-radius: 18;
-    -fx-padding: 24 32 24 32;
-    -fx-effect: dropshadow(gaussian, rgba(25,118,210,0.10), 8, 0.2, 0, 2);
+    -fx-background-color: rgba(255.0,255.0,255.0,0.98);
+    -fx-background-radius: 18.0;
+    -fx-padding: 24.0 32.0 24.0 32.0;
+    -fx-effect: dropshadow(gaussian, rgba(25.0,118.0,210.0,0.1), 8.0, 0.2, 0.0, 2.0);
 }
 .search-title {
-    -fx-font-size: 24px;
+    -fx-font-size: 24.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #1976d2;
 }
 .search-subtitle {
-    -fx-font-size: 15px;
+    -fx-font-size: 15.0px;
     -fx-text-fill: #555;
 }
 .search-btn {
     -fx-background-color: linear-gradient(to right, #ff416c, #ff4b2b);
     -fx-text-fill: #fff;
-    -fx-background-radius: 16;
+    -fx-background-radius: 16.0;
     -fx-font-weight: bold;
-    -fx-padding: 8 24 8 24;
+    -fx-padding: 8.0 24.0 8.0 24.0;
 }
 .search-btn:hover {
     -fx-background-color: linear-gradient(to right, #43e97b, #38f9d7);
@@ -238,31 +238,31 @@
 
 /* Banner ưu đãi */
 .promo-banner {
-    -fx-background-color: rgba(67,233,123,0.08);
-    -fx-background-radius: 18;
-    -fx-padding: 20 28 20 28;
-    -fx-spacing: 10;
+    -fx-background-color: rgba(67.0,233.0,123.0,0.08);
+    -fx-background-radius: 18.0;
+    -fx-padding: 20.0 28.0 20.0 28.0;
+    -fx-spacing: 10.0;
 }
 .promo-title {
-    -fx-font-size: 18px;
+    -fx-font-size: 18.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #1976d2;
 }
 .promo-desc {
-    -fx-font-size: 13px;
+    -fx-font-size: 13.0px;
     -fx-text-fill: #333;
 }
 .promo-strong {
-    -fx-font-size: 16px;
+    -fx-font-size: 16.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #1976d2;
 }
 .promo-btn {
     -fx-background-color: #1976d2;
     -fx-text-fill: #fff;
-    -fx-background-radius: 14;
+    -fx-background-radius: 14.0;
     -fx-font-weight: bold;
-    -fx-padding: 6 20 6 20;
+    -fx-padding: 6.0 20.0 6.0 20.0;
 }
 .promo-btn:hover {
     -fx-background-color: #43e97b;
@@ -276,12 +276,12 @@
 /* Header */
 .checkout-header {
     -fx-background-color: #1a237e;
-    -fx-padding: 0 0 0 38;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.09), 4, 0.1, 0, 1);
+    -fx-padding: 0.0 0.0 0.0 38.0;
+    -fx-effect: dropshadow(gaussian, rgba(0.0,0.0,0.0,0.09), 4.0, 0.1, 0.0, 1.0);
 }
 .checkout-header-label {
     -fx-text-fill: white;
-    -fx-font-size: 22px;
+    -fx-font-size: 22.0px;
     -fx-font-weight: bold;
 }
 
@@ -291,174 +291,174 @@
 }
 .checkout-footer-label {
     -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 8 0 8 0;
+    -fx-font-size: 14.0px;
+    -fx-padding: 8.0 0.0 8.0 0.0;
 }
 
 /* Main Title */
 .checkout-title {
-    -fx-font-size: 32px;
+    -fx-font-size: 32.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #1a237e;
-    -fx-padding: 0 0 10 0;
+    -fx-padding: 0.0 0.0 10.0 0.0;
 }
 
 /* Card Box */
 .checkout-card {
-    -fx-background-color: rgba(255,255,255,0.85);
-    -fx-border-radius: 18;
-    -fx-background-radius: 18;
-    -fx-effect: dropshadow(gaussian, #e0e0e0, 14, 0, 0, 6);
-    -fx-padding: 22 38 22 38;
-    -fx-max-width: 820;
+    -fx-background-color: rgba(255.0,255.0,255.0,0.85);
+    -fx-border-radius: 18.0;
+    -fx-background-radius: 18.0;
+    -fx-effect: dropshadow(gaussian, #e0e0e0, 14.0, 0.0, 0.0, 6.0);
+    -fx-padding: 22.0 38.0 22.0 38.0;
+    -fx-max-width: 820.0;
 }
 
 .checkout-card-small {
     -fx-background-color: white;
-    -fx-border-radius: 18;
-    -fx-background-radius: 18;
-    -fx-effect: dropshadow(gaussian, #e0e0e0, 14, 0, 0, 2);
-    -fx-padding: 28 38 28 38;
-    -fx-max-width: 820;
+    -fx-border-radius: 18.0;
+    -fx-background-radius: 18.0;
+    -fx-effect: dropshadow(gaussian, #e0e0e0, 14.0, 0.0, 0.0, 2.0);
+    -fx-padding: 28.0 38.0 28.0 38.0;
+    -fx-max-width: 820.0;
 }
 
 .checkout-table-card {
-    -fx-background-color: rgba(255,255,255,0.85);
-    -fx-border-radius: 18;
-    -fx-background-radius: 18;
-    -fx-effect: dropshadow(gaussian, #e0e0e0, 14, 0, 0, 2);
-    -fx-padding: 14 24 14 24;
-    -fx-max-width: 820;
+    -fx-background-color: rgba(255.0,255.0,255.0,0.85);
+    -fx-border-radius: 18.0;
+    -fx-background-radius: 18.0;
+    -fx-effect: dropshadow(gaussian, #e0e0e0, 14.0, 0.0, 0.0, 2.0);
+    -fx-padding: 14.0 24.0 14.0 24.0;
+    -fx-max-width: 820.0;
 }
 
 /* Label Styles */
 .checkout-label-title {
     -fx-font-weight: bold;
-    -fx-font-size: 16px;
+    -fx-font-size: 16.0px;
     -fx-text-fill: #374151;
 }
 .checkout-label-value {
-    -fx-font-size: 16px;
+    -fx-font-size: 16.0px;
     -fx-text-fill: #1976d2;
 }
 .checkout-label-status {
-    -fx-font-size: 16px;
+    -fx-font-size: 16.0px;
     -fx-text-fill: #388e3c;
 }
 
 /* Input Styles */
 .checkout-textfield, .checkout-combobox, .checkout-datepicker {
-    -fx-pref-width: 160;
-    -fx-background-radius: 10;
+    -fx-pref-width: 160.0;
+    -fx-background-radius: 10.0;
     -fx-border-color: #cfd8dc;
-    -fx-border-radius: 10;
-    -fx-padding: 6 10 6 10;
-    -fx-font-size: 15px;
+    -fx-border-radius: 10.0;
+    -fx-padding: 6.0 10.0 6.0 10.0;
+    -fx-font-size: 15.0px;
 }
 .checkout-textfield-large {
-    -fx-pref-width: 400;
+    -fx-pref-width: 400.0;
 }
 .checkout-textfield-medium {
-    -fx-pref-width: 180;
+    -fx-pref-width: 180.0;
 }
 .checkout-combobox-small {
-    -fx-pref-width: 130;
+    -fx-pref-width: 130.0;
 }
 
 /* TableView */
 .checkout-table {
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    -fx-background-radius: 10.0;
+    -fx-border-radius: 10.0;
     -fx-border-color: #e1e1e1;
 }
 
 /* Tổng tiền và Button */
 .checkout-total-label {
-    -fx-font-size: 20px;
+    -fx-font-size: 20.0px;
     -fx-text-fill: #263238;
 }
 .checkout-total-value {
-    -fx-font-size: 20px;
+    -fx-font-size: 20.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #e67e22;
 }
 .checkout-btn {
-    -fx-font-size: 18px;
-    -fx-background-color: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+    -fx-font-size: 18.0px;
+    -fx-background-color: linear-gradient(to right, #43e97b 0.0%, #38f9d7 100.0%);
     -fx-text-fill: white;
-    -fx-background-radius: 12;
-    -fx-padding: 8 28 8 28;
+    -fx-background-radius: 12.0;
+    -fx-padding: 8.0 28.0 8.0 28.0;
 }
 
 .checkout-card-large {
-    -fx-background-color: rgba(255,255,255,0.85);
-    -fx-border-radius: 18;
-    -fx-background-radius: 18;
-    -fx-effect: dropshadow(gaussian, #e0e0e0, 14, 0, 0, 2);
-    -fx-padding: 38 38 38 38;         /* tăng padding cho card lớn */
-    -fx-max-width: 820;
-    -fx-min-height: 220;              /* tăng chiều cao tối thiểu */
+    -fx-background-color: rgba(255.0,255.0,255.0,0.85);
+    -fx-border-radius: 18.0;
+    -fx-background-radius: 18.0;
+    -fx-effect: dropshadow(gaussian, #e0e0e0, 14.0, 0.0, 0.0, 2.0);
+    -fx-padding: 38.0 38.0 38.0 38.0;         /* tăng padding cho card lớn */
+    -fx-max-width: 820.0;
+    -fx-min-height: 220.0;              /* tăng chiều cao tối thiểu */
     -fx-alignment: center;
-    -fx-spacing: 28;
+    -fx-spacing: 28.0;
 }
 
 .home-desc {
-    -fx-font-size: 14px;
+    -fx-font-size: 14.0px;
     -fx-text-fill: #607d8b;
-    -fx-padding: 0 0 8 0;
+    -fx-padding: 0.0 0.0 8.0 0.0;
 }
 .search-section {
-    -fx-background-color: rgba(255,255,255,0.85);
-    -fx-background-radius: 14;
-    -fx-padding: 18 18 18 18;
-    -fx-effect: dropshadow(gaussian, #b2dfdb, 8, 0.1, 0, 2);
+    -fx-background-color: rgba(255.0,255.0,255.0,0.85);
+    -fx-background-radius: 14.0;
+    -fx-padding: 18.0 18.0 18.0 18.0;
+    -fx-effect: dropshadow(gaussian, #b2dfdb, 8.0, 0.1, 0.0, 2.0);
 }
 .content-box-home {
-    -fx-background-color: rgba(255,255,255,0.95);
-    -fx-background-radius: 24;
-    -fx-padding: 38 38 38 38;
-    -fx-effect: dropshadow(gaussian, rgba(67,233,123,0.13), 20, 0.3, 0, 6);
+    -fx-background-color: rgba(255.0,255.0,255.0,0.95);
+    -fx-background-radius: 24.0;
+    -fx-padding: 38.0 38.0 38.0 38.0;
+    -fx-effect: dropshadow(gaussian, rgba(67.0,233.0,123.0,0.13), 20.0, 0.3, 0.0, 6.0);
 }
 
 .home-card {
-    -fx-background-color: rgba(255,255,255,0.52);  /* Nền trắng mờ nổi bật */
-    -fx-background-radius: 24;
-    -fx-padding: 48 36 48 36;                      /* Padding lớn */
-    -fx-effect: dropshadow(gaussian, #1976d2, 16, 0.18, 0, 8); /* Bóng đổ xanh nhẹ */
-    -fx-spacing: 18;
-    -fx-border-color: rgba(25, 118, 210, 0.08);    /* Viền xanh nhạt, tuỳ chọn */
-    -fx-border-radius: 24;
-    -fx-border-width: 1;
+    -fx-background-color: rgba(255.0,255.0,255.0,0.52);  /* Nền trắng mờ nổi bật */
+    -fx-background-radius: 24.0;
+    -fx-padding: 48.0 36.0 48.0 36.0;                      /* Padding lớn */
+    -fx-effect: dropshadow(gaussian, #1976d2, 16.0, 0.18, 0.0, 8.0); /* Bóng đổ xanh nhẹ */
+    -fx-spacing: 18.0;
+    -fx-border-color: rgba(25.0, 118.0, 210.0, 0.08);    /* Viền xanh nhạt, tuỳ chọn */
+    -fx-border-radius: 24.0;
+    -fx-border-width: 1.0;
     -fx-alignment: center;
-    -fx-max-width: 820;
+    -fx-max-width: 820.0;
 }
 .product-card {
     -fx-background-color: #ffffff;
     -fx-border-color: #cccccc;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-padding: 10;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
-    -fx-spacing: 10;
-    -fx-pref-width: 220;
-    -fx-pref-height: 320;
+    -fx-border-radius: 8.0;
+    -fx-background-radius: 8.0;
+    -fx-padding: 10.0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.1), 5.0, 0.0, 0.0, 2.0);
+    -fx-spacing: 10.0;
+    -fx-pref-width: 220.0;
+    -fx-pref-height: 320.0;
     -fx-alignment: center;
 }
 
 .name-text {
-    -fx-font-size: 14px;
+    -fx-font-size: 14.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
 }
 
 .price-text {
-    -fx-font-size: 14px;
+    -fx-font-size: 14.0px;
     -fx-font-weight: bold;
     -fx-text-fill: #e53935;
 }
 
 .desc-text {
-    -fx-font-size: 13px;
+    -fx-font-size: 13.0px;
     -fx-text-fill: #555555;
 }
 
@@ -466,8 +466,8 @@
     -fx-background-color: #63C8FF;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-background-radius: 6;
-    -fx-padding: 6 12;
+    -fx-background-radius: 6.0;
+    -fx-padding: 6.0 12.0;
     -fx-cursor: hand;
 }
 .detail-btn:hover {
@@ -479,22 +479,112 @@
     -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-    -fx-background-radius: 24;
-    -fx-padding: 38 38 38 38;
-    -fx-effect: dropshadow(gaussian, rgba(67,233,123,0.13), 20, 0.3, 0, 6);
+    -fx-background-radius: 24.0;
+    -fx-padding: 38.0 38.0 38.0 38.0;
+    -fx-effect: dropshadow(gaussian, rgba(67.0,233.0,123.0,0.13), 20.0, 0.3, 0.0, 6.0);
     /* KHÔNG dùng -fx-background-color hoặc chỉ dùng màu trong suốt nếu muốn overlay */
 }
 
 .main-box {
     -fx-background-color: white;
-    -fx-background-radius: 18;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 18, 0.2, 0, 4);
-    -fx-padding: 30 40 30 40;
+    -fx-background-radius: 18.0;
+    -fx-effect: dropshadow(gaussian, rgba(0.0,0.0,0.0,0.1), 18.0, 0.2, 0.0, 4.0);
+    -fx-padding: 30.0 40.0 30.0 40.0;
 }
 
 .product-card-milk {
     -fx-background-color: #fffbea;
     -fx-border-color: #e0e0e0;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
+    -fx-border-radius: 8.0;
+    -fx-background-radius: 8.0;
 }
+#vb_register{
+	-fx-background-color: white;
+	 -fx-border-color: #e0e0e0;
+	 -fx-border-radius: 8.0;
+    -fx-background-radius: 8.0;
+	
+}
+#bg_register{
+	   -fx-background-image: url("../images/background.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+#bg_login{
+	 -fx-background-image: url("../images/background.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+	
+}
+
+/* =======================
+   Dashboard Menu Buttons
+   ======================= */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 15px 20px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+    -fx-max-width: infinity;
+    -fx-min-width: 0;
+    -fx-pref-width: infinity;
+}
+
+.menu-button:hover {
+    -fx-background-color: #6be600;
+    -fx-text-fill: #1a1a1a;
+    -fx-max-width: infinity;
+    -fx-min-width: 0;
+    -fx-pref-width: infinity;
+}
+
+.menu-button:pressed {
+    -fx-background-color: #5ac500;
+    -fx-text-fill: #1a1a1a;
+    -fx-max-width: infinity;
+    -fx-min-width: 0;
+    -fx-pref-width: infinity;
+}
+
+/* =======================
+   Dashboard Refresh Button
+   ======================= */
+.refresh-button {
+    -fx-background-color: #7CFC00;
+    -fx-text-fill: #1a1a1a;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 20px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+    -fx-max-width: infinity;
+    -fx-min-width: 0;
+    -fx-pref-width: infinity;
+}
+
+.refresh-button:hover {
+    -fx-background-color: #6be600;
+    -fx-text-fill: #1a1a1a;
+    -fx-max-width: infinity;
+    -fx-min-width: 0;
+    -fx-pref-width: infinity;
+}
+
+.refresh-button:pressed {
+    -fx-background-color: #5ac500;
+    -fx-text-fill: #1a1a1a;
+    -fx-max-width: infinity;
+    -fx-min-width: 0;
+    -fx-pref-width: infinity;
+}
+

@@ -60,9 +60,9 @@ ManagerYard/
 │       ├── ImageUtil.java         # Image handling utilities
 │       └── QRUtill.java          # QR code utilities
 ├── bin/                          # Compiled classes
-├── yards.json                    # Yard data storage
-├── bookings.json                 # Booking data storage
-├── services.json                 # Service data storage
+├── data/yards.json                    # Yard data storage
+├── data/bookings.json                 # Booking data storage
+├── data/services.json                 # Service data storage
 └── build.fxbuild                 # JavaFX build configuration
 ```
 
@@ -84,8 +84,8 @@ Represents a football yard with properties:
 ### BookingModel
 Represents a booking with properties:
 - `bookingId`: Unique identifier
-- `customerName`: Customer name
-- `customerPhone`: Customer phone
+- `bookerName`: Customer name
+- `bookerPhone`: Customer phone
 - `bookingTime`: Booking timestamp
 - `depositAmount`: Deposit amount
 - `totalAmount`: Total booking amount
@@ -149,7 +149,7 @@ The project uses `build.fxbuild` for JavaFX application packaging:
 
 ## Data Files
 
-### yards.json
+### data/yards.json
 Stores yard information in JSON format:
 ```json
   [object Object]   yardId":uuid,
@@ -163,12 +163,12 @@ isAvailable": true
 ]
 ```
 
-### bookings.json
+### data/bookings.json
 Stores booking information:
 ```json
   [object Object]    bookingId": "uuid",
-   customerName":Customer Name",
-    customerPhone": "Phone",
+   bookerName":Customer Name",
+    bookerPhone": "Phone",
   bookingTime:225011:00",
    depositAmount": 50,
     totalAmount: 10000    paymentStatus": "PAID",
@@ -177,7 +177,7 @@ Stores booking information:
 ]
 ```
 
-### services.json
+### data/services.json
 Stores service information:
 ```json
   [object Object]    serviceId": "uuid",

@@ -78,17 +78,17 @@ public class ServiceController implements BaseController {
 
 		ServicesModel service = new ServicesModel(serviceId, serviceName, serviceDescription, servicePrice);
 		DuLieu.getInstance().addService(service);
-		DuLieu.getInstance().saveServiceToFile("services.json");
+		DuLieu.getInstance().saveServiceToFile("data/services.json");
 
 		System.out.println("Thêm dịch vụ thành công!");
 	}
 
 	public void showServices() {
-		DuLieu.getInstance().loadServicesFromFile("services.json");
+		DuLieu.getInstance().loadServicesFromFile("data/services.json");
 		List<ServicesModel> services = DuLieu.getInstance().getServices();
 
 		if (services == null || services.isEmpty()) {
-			System.out.println("⚠ Không có dịch vụ nào.");
+			System.out.println(" Không có dịch vụ nào.");
 			return;
 		}
 
@@ -100,7 +100,7 @@ public class ServiceController implements BaseController {
 
 	@Override
 	public void loadData() {
-		DuLieu.getInstance().loadServicesFromFile("services.json");
+		DuLieu.getInstance().loadServicesFromFile("data/services.json");
 	}
 
 	@Override

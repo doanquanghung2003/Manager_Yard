@@ -15,7 +15,15 @@
     "isAvailable": true,
     "createAt": "2025-07-14 16:52",
     "updateAt": "2025-07-14 16:52",
-    "maintenanceSlots": [],
+    "maintenanceSlots": [
+      {
+        "slotId": "fc457d00-6b42-439c-a5d6-7bc37fe6624a",
+        "startTime": "2025-07-19 08:30",
+        "endTime": "2025-07-19 08:30",
+        "isBooked": true,
+        "slotType": "booking"
+      }
+    ],
     "eventSlots": [
       {
         "slotId": "372f35df-0783-4340-915f-2d68afad9f02",
@@ -27,16 +35,12 @@
     ]
   },
   {
-    "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
-    "yardName": "san 2",
-    "yardType": "FIVE_A_SIDE",
-    "yardPrice": 3434324.0,
-    "yardDescription": "sd",
-    "yardThumbnail": "s",
-    "yardImages": [
-      "ư"
-    ],
-    "yardAddress": "sda",
+    "yardId": "67137219-e328-440d-92d6-7e7881e5092d",
+    "yardName": "Sân bóng đá",
+    "yardPrice": 200000.0,
+    "yardThumbnail": "D:\\Duan\\Manager_Yard\\src\\images\\1752808577071_HaruPet-Photoroom.png",
+    "yardImages": [],
+    "yardAddress": "Băc từ niên",
     "yardStatus": "active",
     "isAvailable": true,
     "createAt": "2025-07-18 10:16",
@@ -65,5 +69,19 @@
         "slotType": "booking"
       }
     ]
+  },
+  {
+    "yardId": "dbf9edea-3d30-4366-9f15-bc2e184834dd",
+    "yardName": "Sân cầu lông",
+    "yardPrice": 100000.0,
+    "yardThumbnail": "D:\\Duan\\Manager_Yard\\src\\images\\1752909300673_Math1.jpg",
+    "yardImages": [],
+    "yardAddress": "Cầu diễn",
+    "yardStatus": "active",
+    "isAvailable": true,
+    "createAt": "2025-07-19 14:15",
+    "updateAt": "2025-07-19 14:15",
+    "maintenanceSlots": [],
+    "eventSlots": []
   }
 ]

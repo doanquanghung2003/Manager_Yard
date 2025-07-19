@@ -61,7 +61,7 @@ public class YardController implements BaseController {
     }
 
     	public void initialize() {
-		DuLieu.getInstance().loadYardsFromFile("yards.json");
+		DuLieu.getInstance().loadYardsFromFile("data/yards.json");
 		handleShowAllYards(); // hoặc constructorView()
 		setOnAction();
 		refresh();
@@ -140,7 +140,7 @@ public class YardController implements BaseController {
         );
 
         DuLieu.getInstance().addYard(yard);
-        DuLieu.getInstance().saveYardToFile("yards.json");
+        DuLieu.getInstance().saveYardToFile("data/yards.json");
         System.out.println("✅ Thêm sân thành công!");
     }
 
@@ -166,8 +166,6 @@ public class YardController implements BaseController {
                         selectedYards.add(yard);
                     }
                 });
-                controller.setMainBorderPane(mainBorderPane);
-                controller.setOnDetail(yard -> showYardDetail(yard));
 
                 FlowPane.setMargin(itemBox, new Insets(10));
                 flowPane.getChildren().add(itemBox);
@@ -212,7 +210,7 @@ public class YardController implements BaseController {
 
     @Override
     public void loadData() {
-        DuLieu.getInstance().loadYardsFromFile("yards.json");
+        DuLieu.getInstance().loadYardsFromFile("data/yards.json");
     }
 
     @Override
@@ -234,13 +232,21 @@ public class YardController implements BaseController {
 
     public void showYardDetail(YardModel yd) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/DetailProduct.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlclient/DetailProduct.fxml"));
             Parent detailRoot = loader.load();
             ProductDetailController detailController = loader.getController();
             detailController.setYard(yd);
 
             // Lấy LayoutClientController từ context hoặc truyền vào
-            mainLayoutController.setContent(detailRoot);
+            if (mainLayoutController != null) {
+                mainLayoutController.setContent(detailRoot);
+            } else {
+                // Fallback: mở stage mới nếu không có controller cha
+                Stage stage = new Stage();
+                stage.setTitle("Chi tiết sân bóng");
+                stage.setScene(new Scene(detailRoot));
+                stage.show();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

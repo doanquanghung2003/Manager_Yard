@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class UserService {
-    private static final String USER_FILE = "data/users.json";
+    private static final String USER_FILE = "data/data/users.json";
     private static final Gson gson = new GsonBuilder()
         .setPrettyPrinting()
         .registerTypeAdapter(java.time.LocalDateTime.class, (com.google.gson.JsonSerializer<LocalDateTime>) 

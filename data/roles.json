@@ -1,0 +1,71 @@
+[
+  {
+    "roleId": "admin-role",
+    "roleName": "Administrator",
+    "description": "Quản trị viên hệ thống với tất cả quyền hạn",
+    "permissions": [
+      "yard.view",
+      "yard.create",
+      "yard.edit",
+      "yard.delete",
+      "booking.view",
+      "booking.create",
+      "booking.edit",
+      "booking.delete",
+      "booking.approve",
+      "service.view",
+      "service.create",
+      "service.edit",
+      "service.delete",
+      "user.view",
+      "user.create",
+      "user.edit",
+      "user.delete",
+      "role.view",
+      "role.create",
+      "role.edit",
+      "role.delete",
+      "stats.view",
+      "stats.export",
+      "system.settings",
+      "system.backup",
+      "system.restore"
+    ],
+    "createAt": "2025-07-19 15:05",
+    "updateAt": "2025-07-19 15:05"
+  },
+  {
+    "roleId": "manager-role",
+    "roleName": "Manager",
+    "description": "Quản lý với quyền hạn quản lý sân và đặt sân",
+    "permissions": [
+      "yard.view",
+      "yard.create",
+      "yard.edit",
+      "booking.view",
+      "booking.create",
+      "booking.edit",
+      "booking.approve",
+      "service.view",
+      "service.create",
+      "service.edit",
+      "user.view",
+      "stats.view"
+    ],
+    "createAt": "2025-07-19 15:05",
+    "updateAt": "2025-07-19 15:05"
+  },
+  {
+    "roleId": "staff-role",
+    "roleName": "Nhân viên",
+    "description": "Nhân viên với quyền hạn cơ bản",
+    "permissions": [
+      "yard.view",
+      "booking.view",
+      "booking.create",
+      "service.view"
+    ],
+    "createAt": "2025-07-19 15:05",
+    "updateAt": "2025-07-19 15:05"
+  }
+]
