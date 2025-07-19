@@ -13,19 +13,23 @@ public class UserModel implements Bean {
     private String fullName;
     private LocalDateTime createAt;
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private String role; // Thêm trường role để phân quyền
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public UserModel() {
       
         this.createAt = LocalDateTime.now();
+        this.role = "user"; // Mặc định là user
     }
 
-    public UserModel(String userName, String password, String email, String fullName, LocalDateTime createAt) {
+    public UserModel(String userName, String password, String email, String fullName, LocalDateTime createAt, String role) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.fullName = fullName;
         this.createAt = createAt != null ? createAt : LocalDateTime.now();
+        this.role = role != null ? role : "user";
     }
 
     // --- Getter và Setter ---
@@ -77,6 +81,14 @@ public class UserModel implements Bean {
         this.createAt = createAt;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     // --- Ghi JSON ---
     @Override
     public JsonObject toJsonObject() {
@@ -87,6 +99,7 @@ public class UserModel implements Bean {
         obj.addProperty("email", email);
         obj.addProperty("fullName", fullName);
         obj.addProperty("createAt", createAt != null ? createAt.format(FORMATTER) : "");
+        obj.addProperty("role", role); // Ghi role vào JSON
         return obj;
     }
 
@@ -102,9 +115,10 @@ public class UserModel implements Bean {
         this.fullName = obj.has("fullName") ? obj.get("fullName").getAsString() : null;
 
         if (obj.has("createAt") && !obj.get("createAt").getAsString().isEmpty()) {
-            this.createAt = LocalDateTime.parse(obj.get("createAt").getAsString(), FORMATTER);
+            this.createAt = LocalDateTime.parse(obj.get("createAt").getAsString() + " 00:00:00", DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         } else {
             this.createAt = null;
         }
+        this.role = obj.has("role") ? obj.get("role").getAsString() : "user"; // Đọc role từ JSON, mặc định user
     }
 }

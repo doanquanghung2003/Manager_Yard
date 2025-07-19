@@ -3,11 +3,12 @@
     "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
     "yardName": "sab3",
     "yardType": "SEVEN_A_SIDE",
-    "yardPrice": 3432432.0,
+    "yardPrice": 34.0,
     "yardDescription": "sda",
-    "yardThumbnail": "3",
+    "yardThumbnail": "D:\\Duan\\Manager_Yard\\src\\images\\1752807385490_HaruPet-Photoroom.png",
     "yardImages": [
-      "ư"
+      "ư",
+      "src\\images\\1752811300797_Screenshot 2025-07-15 110702.png"
     ],
     "yardAddress": "ssd",
     "yardStatus": "active",
@@ -38,8 +39,8 @@
     "yardAddress": "sda",
     "yardStatus": "active",
     "isAvailable": true,
-    "createAt": "2025-07-15 16:00",
-    "updateAt": "2025-07-15 16:00",
+    "createAt": "2025-07-18 10:16",
+    "updateAt": "2025-07-18 10:16",
     "maintenanceSlots": [],
     "eventSlots": [
       {

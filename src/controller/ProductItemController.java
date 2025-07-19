@@ -17,6 +17,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.Node;
 
 public class ProductItemController {
     @FXML private Text txt_nameProduct, txt_priceProduct, txt_descriptionProduct;
@@ -27,6 +30,8 @@ public class ProductItemController {
     private YardModel currentYard;
     private Consumer<YardModel> onSelect;
     private boolean isSelected = false;
+    private BorderPane mainBorderPane;
+    private Consumer<YardModel> onDetail;
 
     NumberFormat vnFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
@@ -44,19 +49,8 @@ public class ProductItemController {
 
         // Nút chi tiết
         btn_detailProduct.setOnAction(event -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlclient/DetailProduct.fxml"));
-                Parent detailRoot = loader.load();
-
-                ProductDetailController detailController = loader.getController();
-                detailController.setYard(currentYard);
-
-                Stage detailStage = new Stage();
-                detailStage.setTitle("Chi tiết sân bóng");
-                detailStage.setScene(new Scene(detailRoot));
-                detailStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (onDetail != null) {
+                onDetail.accept(currentYard);
             }
         });
 
@@ -94,5 +88,13 @@ public class ProductItemController {
 
     public YardModel getCurrentYard() {
         return currentYard;
+    }
+
+    public void setMainBorderPane(BorderPane pane) {
+        this.mainBorderPane = pane;
+    }
+
+    public void setOnDetail(Consumer<YardModel> onDetail) {
+        this.onDetail = onDetail;
     }
 }

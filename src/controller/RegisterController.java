@@ -6,6 +6,15 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import utils.UserService;
+import bean.UserModel;
+import java.time.LocalDateTime;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import controller.LayoutClientController;
+import controller.LoginController;
 
 public class RegisterController implements BaseController {
 
@@ -50,11 +59,11 @@ public class RegisterController implements BaseController {
 
     @FXML
     private Label usernameError;
-    
-public void initialize() {
-		
-	}
-    
+
+    private LayoutClientController mainLayoutController;
+    public void setMainLayoutController(LayoutClientController controller) {
+        this.mainLayoutController = controller;
+    }
 
 	@Override
 	public void constructorView() {
@@ -79,5 +88,65 @@ public void initialize() {
 		// TODO Auto-generated method stub
 		
 	}
+
+    public void initialize() {
+        btn_register.setOnAction(e -> handleRegister());
+        hl_login.setOnAction(e -> openLoginView());
+    }
+
+    private void handleRegister() {
+        String username = tft_username.getText().trim();
+        String password = pl_password.getText();
+        String confirmPassword = pl_confirmPassword.getText();
+        String email = tft_email.getText().trim();
+        String fullName = tft_name.getText().trim();
+
+        // Reset lỗi
+        usernameError.setText("");
+        passwordError.setText("");
+        confirmPasswordError.setText("");
+        emailError.setText("");
+        nameError.setText("");
+
+        boolean valid = true;
+        if (username.isEmpty()) { usernameError.setText("Không được để trống"); valid = false; }
+        if (password.isEmpty()) { passwordError.setText("Không được để trống"); valid = false; }
+        if (!password.equals(confirmPassword)) { confirmPasswordError.setText("Mật khẩu không khớp"); valid = false; }
+        if (email.isEmpty()) { emailError.setText("Không được để trống"); valid = false; }
+        if (fullName.isEmpty()) { nameError.setText("Không được để trống"); valid = false; }
+        if (UserService.isUsernameExists(username)) { usernameError.setText("Tên tài khoản đã tồn tại"); valid = false; }
+
+        if (!valid) return;
+
+        // Tạo user mới với role mặc định là "user"
+        UserModel newUser = new UserModel(username, password, email, fullName, LocalDateTime.now(), "user");
+
+        // Lưu user vào hệ thống
+        UserService.addUser(newUser);
+
+        // Chuyển về trang đăng nhập
+        openLoginView();
+    }
+
+    private void openLoginView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/Login.fxml"));
+            Parent loginRoot = loader.load();
+            // Truyền controller cha nếu có
+            LoginController loginController = loader.getController();
+            if (mainLayoutController != null) {
+                loginController.setMainLayoutController(mainLayoutController);
+                mainLayoutController.setContent(loginRoot);
+            } else {
+                // fallback: đổi scene nếu không có controller cha
+                Stage stage = (Stage) hl_login.getScene().getWindow();
+                stage.setScene(new Scene(loginRoot));
+                stage.setTitle("Đăng nhập");
+                stage.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
