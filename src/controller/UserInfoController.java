@@ -9,7 +9,8 @@ import bean.UserModel;
 public class UserInfoController {
     @FXML private TextField emailField;
     @FXML private TextField usernameField;
-    @FXML private TextField nameField;
+    @FXML private Label nameLabel; // cho phần left
+    @FXML private TextField nameField; // cho phần center
     @FXML private Label joinDateLabel;
     @FXML private PasswordField passwordField;
 
@@ -21,6 +22,7 @@ public class UserInfoController {
             emailField.setText(user.getEmail());
             usernameField.setText(user.getUserName());
             nameField.setText(user.getFullName());
+            nameLabel.setText(user.getFullName()); // Hiển thị ở phần left
             if (user.getCreateAt() != null) {
                 // Nếu getCreateAt() là LocalDateTime
                 joinDateLabel.setText(String.format("%02d/%02d/%04d",
@@ -30,5 +32,11 @@ public class UserInfoController {
                 ));
             }
         }
+    }
+
+    public void initialize() {
+        nameField.textProperty().addListener((obs, oldVal, newVal) -> {
+            nameLabel.setText(newVal);
+        });
     }
 }

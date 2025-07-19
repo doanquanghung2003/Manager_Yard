@@ -53,7 +53,7 @@
             <!-- Menu ngang -->
             <HBox alignment="CENTER_LEFT" prefHeight="44" spacing="32" styleClass="menu-bar">
                 <children>
-                    <Button styleClass="menu-btn selected">
+                    <Button fx:id="homeBtn" styleClass="menu-btn selected" onAction="#handleHome">
                         <graphic>
                             <ImageView fitHeight="18" fitWidth="18">
                                 <image>

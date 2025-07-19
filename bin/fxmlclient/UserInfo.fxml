@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserInfoController">
+<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserInfoController">
     <left>
         <VBox alignment="CENTER" maxWidth="320" minWidth="320" spacing="20" style="-fx-padding: 40; -fx-background-color: rgba(0,60,120,0.85); -fx-background-radius: 16 0 0 16;">
             <ImageView fx:id="avatarImage" fitHeight="120" fitWidth="120" style="-fx-background-color: #000; -fx-border-radius: 8; -fx-background-radius: 8;">
@@ -23,10 +24,7 @@
                     <Image url="@../images/profile.png" />
                 </image>
             </ImageView>
-         <Label text="Họ và tên" textFill="WHITE" />
-         <Label text="Ngày tạo" textFill="WHITE" />
-         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Label fx:id="usernameLabel" style="-fx-text-fill: #fff; -fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Label fx:id="nameLabel" style="-fx-text-fill: #fff; -fx-font-size: 20px; -fx-font-weight: bold;" />
             <Label fx:id="joinDateLabel" style="-fx-text-fill: #FFD600; -fx-font-size: 16px;" />
         </VBox>
     </left>
@@ -48,9 +46,12 @@
       </VBox>
    </right>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 0;">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 0;" BorderPane.alignment="CENTER">
          <top>
-                <Label alignment="CENTER" prefHeight="61.0" prefWidth="320.0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1976D2;" text="THÔNG TIN TÀI KHOẢN" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+                <Label alignment="CENTER" prefHeight="61.0" prefWidth="320.0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1976D2;" text="THÔNG TIN TÀI KHOẢN" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="25.0" />
+               </BorderPane.margin></Label>
          </top>
          <center>
             <GridPane alignment="CENTER" hgap="18" maxWidth="600" vgap="18" BorderPane.alignment="CENTER">
@@ -94,7 +95,10 @@
             </GridPane>
          </center>
          <bottom>
-                <Button fx:id="updateBtn" style="-fx-background-color: #FFD600; -fx-text-fill: #222; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 6;" text="CẬP NHẬT" BorderPane.alignment="CENTER" />
+                <Button fx:id="updateBtn" style="-fx-background-color: #FFD600; -fx-text-fill: #222; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 6;" text="CẬP NHẬT" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="25.0" />
+               </BorderPane.margin></Button>
          </bottom>
       </BorderPane>
    </center>

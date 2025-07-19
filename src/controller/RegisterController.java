@@ -118,8 +118,11 @@ public class RegisterController implements BaseController {
 
         if (!valid) return;
 
-        UserModel user = new UserModel(username, password, email, fullName, LocalDateTime.now());
-        UserService.addUser(user);
+        // Tạo user mới với role mặc định là "user"
+        UserModel newUser = new UserModel(username, password, email, fullName, LocalDateTime.now(), "user");
+
+        // Lưu user vào hệ thống
+        UserService.addUser(newUser);
 
         // Chuyển về trang đăng nhập
         openLoginView();

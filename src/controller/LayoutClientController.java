@@ -185,4 +185,14 @@ public class LayoutClientController {
     private void openBookingHistory() {
         // Load BookingHistory.fxml hoặc show dialog
     }
+
+    public void handleHome(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/Home.fxml"));
+            Parent homeRoot = loader.load();
+            setContent(homeRoot); // setContent là của LayoutClientController
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
