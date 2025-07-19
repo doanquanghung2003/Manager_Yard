@@ -3,7 +3,7 @@
     "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
     "yardName": "sab3",
     "yardType": "SEVEN_A_SIDE",
-    "yardPrice": 3432432.0,
+    "yardPrice": 100000.0,
     "yardDescription": "sda",
     "yardThumbnail": "D:\\Duan\\Manager_Yard\\src\\images\\1752807385490_HaruPet-Photoroom.png",
     "yardImages": [
@@ -15,8 +15,24 @@
     "isAvailable": true,
     "createAt": "2025-07-14 16:52",
     "updateAt": "2025-07-14 16:52",
-    "maintenanceSlots": [],
-    "eventSlots": []
+    "maintenanceSlots": [
+      {
+        "slotId": "fc457d00-6b42-439c-a5d6-7bc37fe6624a",
+        "startTime": "2025-07-19 08:30",
+        "endTime": "2025-07-19 08:30",
+        "isBooked": true,
+        "slotType": "booking"
+      }
+    ],
+    "eventSlots": [
+      {
+        "slotId": "372f35df-0783-4340-915f-2d68afad9f02",
+        "startTime": "2025-07-17 21:30",
+        "endTime": "2025-07-17 22:00",
+        "isBooked": true,
+        "slotType": "booking"
+      }
+    ]
   },
   {
     "yardId": "67137219-e328-440d-92d6-7e7881e5092d",
@@ -29,6 +45,42 @@
     "isAvailable": true,
     "createAt": "2025-07-18 10:16",
     "updateAt": "2025-07-18 10:16",
+    "maintenanceSlots": [],
+    "eventSlots": [
+      {
+        "slotId": "c0449cd6-d663-4d13-803d-b047c7b8a711",
+        "startTime": "2025-07-17 14:30",
+        "endTime": "2025-07-17 15:00",
+        "isBooked": true,
+        "slotType": "event"
+      },
+      {
+        "slotId": "8b91f1b2-2de1-473a-989b-801fc545cdbf",
+        "startTime": "2025-07-17 15:30",
+        "endTime": "2025-07-17 16:00",
+        "isBooked": true,
+        "slotType": "event"
+      },
+      {
+        "slotId": "58b6c768-8923-4013-864e-51724dafd53f",
+        "startTime": "2025-07-17 20:30",
+        "endTime": "2025-07-17 22:30",
+        "isBooked": true,
+        "slotType": "booking"
+      }
+    ]
+  },
+  {
+    "yardId": "dbf9edea-3d30-4366-9f15-bc2e184834dd",
+    "yardName": "Sân cầu lông",
+    "yardPrice": 100000.0,
+    "yardThumbnail": "D:\\Duan\\Manager_Yard\\src\\images\\1752909300673_Math1.jpg",
+    "yardImages": [],
+    "yardAddress": "Cầu diễn",
+    "yardStatus": "active",
+    "isAvailable": true,
+    "createAt": "2025-07-19 14:15",
+    "updateAt": "2025-07-19 14:15",
     "maintenanceSlots": [],
     "eventSlots": []
   }

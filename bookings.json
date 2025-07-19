@@ -1,9 +1,9 @@
 [
   {
-    "bookingId": "e8355a88-3ac5-4038-8c61-23d08e3e1e17",
-    "bookerName": "Son",
-    "bookerPhone": "23213",
-    "bookingTime": "2025-07-16 14:13",
+    "bookingId": "c1615e94-0352-464c-ba4c-de354a576f91",
+    "bookerName": "Phạm Xuân Sơn ",
+    "bookerPhone": "123",
+    "bookingTime": "2025-07-18 16:04",
     "totalAmount": 1736216.0,
     "serviceIds": [
       "6195d8ce-484e-4289-b5a3-ad4f7c4f6aad"
@@ -13,9 +13,9 @@
         "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
         "slots": [
           {
-            "slotId": "2a996bbc-e274-457c-83eb-1949654a81d1",
-            "startTime": "2025-07-17 05:00",
-            "endTime": "2025-07-17 07:00",
+            "slotId": "f26f1b36-f87c-4342-bb24-cc20bbf1165a",
+            "startTime": "2025-07-18 16:00",
+            "endTime": "2025-07-18 19:00",
             "isBooked": true,
             "slotType": "booking"
           }
@@ -24,166 +24,11 @@
     ],
     "payments": [
       {
-        "recordId": "payment-001",
+        "recordId": "62e64d33-8292-4e6f-af2c-8883345f68fb",
         "amount": 1736216.0,
-        "method": "",
-        "status": "PAID",
-        "time": "2025-07-16 14:13",
-        "note": "Thanh toán đủ"
-      }
-    ]
-  },
-  {
-    "bookingId": "e7c5b510-ce11-432a-a5e6-cae7685cb4e9",
-    "bookerName": "Pham Xuan Son",
-    "bookerPhone": "231231",
-    "bookingTime": "2025-07-17 10:34",
-    "totalAmount": 3433378.0,
-    "serviceIds": [],
-    "bookingYards": [
-      {
-        "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
-        "slots": [
-          {
-            "slotId": "2ab19d7e-e3e6-43b8-93a1-ce94a5cd2922",
-            "startTime": "2025-07-17 11:00",
-            "endTime": "2025-07-17 14:00",
-            "isBooked": true,
-            "slotType": "booking"
-          }
-        ]
-      },
-      {
-        "yardId": "0b03abc7-4852-4b02-ba5c-0fb3e227c151",
-        "slots": [
-          {
-            "slotId": "9b12c3b9-a9bb-4879-9566-74b9a19c3c29",
-            "startTime": "2025-07-17 16:30",
-            "endTime": "2025-07-17 19:30",
-            "isBooked": true,
-            "slotType": "booking"
-          }
-        ]
-      }
-    ],
-    "payments": [
-      {
-        "recordId": "payment-002",
-        "amount": 3433378.0,
-        "method": "",
-        "status": "PAID",
-        "time": "2025-07-17 10:34",
-        "note": "Thanh toán đủ"
-      }
-    ]
-  },
-  {
-    "bookingId": "eeab3e1c-cf2a-4993-b28c-1a7f8074868a",
-    "bookerName": "Pham Xuan Son",
-    "bookerPhone": "12323343",
-    "bookingTime": "2025-07-18 10:17",
-    "totalAmount": 1816216.0,
-    "serviceIds": [],
-    "bookingYards": [
-      {
-        "yardId": "67137219-e328-440d-92d6-7e7881e5092d",
-        "slots": [
-          {
-            "slotId": "1f594751-6ac2-4978-a43e-030dc76bd2e4",
-            "startTime": "2025-07-18 11:00",
-            "endTime": "2025-07-18 14:00",
-            "isBooked": true,
-            "slotType": "booking"
-          }
-        ]
-      },
-      {
-        "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
-        "slots": [
-          {
-            "slotId": "78fd278e-95b1-451e-94b7-2ddd1bce8f90",
-            "startTime": "2025-07-18 11:00",
-            "endTime": "2025-07-18 14:00",
-            "isBooked": true,
-            "slotType": "booking"
-          }
-        ]
-      }
-    ],
-    "payments": [
-      {
-        "recordId": "payment-003",
-        "amount": 1816216.0,
-        "method": "",
-        "status": "PAID",
-        "time": "2025-07-18 10:17",
-        "note": "Thanh toán đủ"
-      }
-    ]
-  },
-  {
-    "bookingId": "fabb4cdc-a93d-4017-b33a-5439e4e8f312",
-    "bookerName": "HungHuBa",
-    "bookerPhone": "122321",
-    "bookingTime": "2025-07-18 11:04",
-    "totalAmount": 1816216.0,
-    "serviceIds": [],
-    "bookingYards": [
-      {
-        "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
-        "slots": [
-          {
-            "slotId": "42ce5d24-0f6b-4a89-a345-f85c69a6aae9",
-            "startTime": "2025-07-18 14:00",
-            "endTime": "2025-07-18 17:00",
-            "isBooked": true,
-            "slotType": "booking"
-          }
-        ]
-      },
-      {
-        "yardId": "67137219-e328-440d-92d6-7e7881e5092d",
-        "slots": [
-          {
-            "slotId": "8c1091ef-faed-4c17-a30d-d041c18e9fdb",
-            "startTime": "2025-07-18 16:30",
-            "endTime": "2025-07-18 19:30",
-            "isBooked": true,
-            "slotType": "booking"
-          }
-        ]
-      }
-    ],
-    "payments": []
-  },
-  {
-    "bookingId": "2f1f7518-dafb-491b-b1c8-02b4c710351e",
-    "bookerName": "Hung",
-    "bookerPhone": "231312",
-    "bookingTime": "2025-07-18 11:12",
-    "totalAmount": 1716216.0,
-    "serviceIds": [],
-    "bookingYards": [
-      {
-        "yardId": "f593df92-1534-481e-bdf5-30202999cfc6",
-        "slots": [
-          {
-            "slotId": "8ed58a1e-f918-441f-9db4-0087d7403ed3",
-            "startTime": "2025-07-18 17:00",
-            "endTime": "2025-07-18 19:30",
-            "isBooked": true,
-            "slotType": "booking"
-          }
-        ]
-      }
-    ],
-    "payments": [
-      {
-        "recordId": "5557099f-63e3-48bc-975a-a300d36cba3b",
-        "amount": 1716216.0,
         "method": "CASH",
         "status": "PAID",
-        "time": "2025-07-18 11:12",
+        "time": "2025-07-18 16:04",
         "note": "Thanh toán đủ"
       }
     ]

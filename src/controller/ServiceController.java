@@ -88,7 +88,7 @@ public class ServiceController implements BaseController {
 		List<ServicesModel> services = DuLieu.getInstance().getServices();
 
 		if (services == null || services.isEmpty()) {
-			System.out.println("⚠ Không có dịch vụ nào.");
+			System.out.println(" Không có dịch vụ nào.");
 			return;
 		}
 

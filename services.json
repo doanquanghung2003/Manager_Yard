@@ -1,8 +1,20 @@
 [
   {
     "serviceId": "6195d8ce-484e-4289-b5a3-ad4f7c4f6aad",
-    "serviceName": "Dich vu 1",
-    "description": "khong",
+    "serviceName": "Dịch vụ nước uống",
+    "description": "Nước uống các loại",
     "price": 20000.0
+  },
+  {
+    "serviceId": "7a2b3c4d-5e6f-7890-abcd-ef1234567890",
+    "serviceName": "Dịch vụ thuê dụng cụ",
+    "description": "Thuê bóng, lưới, dụng cụ thể thao",
+    "price": 50000.0
+  },
+  {
+    "serviceId": "1d908c0c-90c3-42e4-933b-f4a7c6ada4cb",
+    "serviceName": "Thuê quần áo",
+    "description": "Cho thuê quần áo đá bóng",
+    "price": 1000000.0
   }
 ]

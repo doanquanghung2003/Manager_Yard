@@ -35,6 +35,7 @@ public class DuLieu {
     private ArrayList<TimeSlot> timeSlotLists;
     private ArrayList<ServicesModel> servicesList;
     private ArrayList<UserModel> usersList;
+    private ArrayList<bean.RoleModel> rolesList;
     
     public DuLieu() {
         yardList = new ArrayList<>();
@@ -42,6 +43,7 @@ public class DuLieu {
         timeSlotLists = new ArrayList<>();
         servicesList = new ArrayList<>();
         usersList = new ArrayList<>();
+        rolesList = new ArrayList<>();
     }
 
     public static DuLieu getInstance() {
@@ -56,6 +58,10 @@ public class DuLieu {
     }
 public ArrayList<UserModel> getUsers(){
 	return usersList;
+}
+
+public ArrayList<bean.RoleModel> getRoles(){
+	return rolesList;
 }
     public ArrayList<BookingModel> getBookings() {
         return bookingList;
@@ -75,6 +81,10 @@ public ArrayList<UserModel> getUsers(){
 public void registerUser(UserModel user) {
 	usersList.add(user);
 }
+
+public void addRole(bean.RoleModel role) {
+	rolesList.add(role);
+}
     public void addBooking(BookingModel booking) {
         bookingList.add(booking);
     }
@@ -93,6 +103,10 @@ public void registerUser(UserModel user) {
 
     public ServicesModel findServiceById(String id) {
         return servicesList.stream().filter(s -> s.getServiceId().equals(id)).findFirst().orElse(null);
+    }
+    
+    public bean.RoleModel findRoleById(String id) {
+        return rolesList.stream().filter(r -> r.getRoleId().equals(id)).findFirst().orElse(null);
     }
     public String getYardNameById(String yardId) {
         for (YardModel y : getYards()) {
@@ -142,8 +156,23 @@ public void registerUser(UserModel user) {
     public void saveUserToFile(String fileName) {
         try {
             File file = new File(fileName);
+            JsonArray json = JsonUtils.toJsonArray(usersList);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(gson.toJson(json));
+            }
+            System.out.println(" Đã lưu " + usersList.size() + "  vào " + fileName);
+        } catch (Exception e) {
+            System.err.println(" Lỗi khi lưu file:");
+            e.printStackTrace();
+        }
+    }
 
-            // Tạo Gson với formatter cho LocalDateTime
+
+    public void saveRoleToFile(String fileName) {
+        try {
+            File file = new File(fileName);
+
             Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .registerTypeAdapter(LocalDateTime.class, (com.google.gson.JsonSerializer<LocalDateTime>)
@@ -152,14 +181,13 @@ public void registerUser(UserModel user) {
                     ))
                 .create();
 
-            // Ghi dữ liệu
             try (FileWriter writer = new FileWriter(file)) {
-                gson.toJson(usersList, writer);
+                gson.toJson(rolesList, writer);
             }
 
-            System.out.println(" Đã lưu " + usersList.size() + " người dùng vào file: " + fileName);
+            System.out.println(" Đã lưu " + rolesList.size() + " vai trò vào file: " + fileName);
         } catch (Exception e) {
-            System.err.println(" Lỗi khi lưu file người dùng: " + e.getMessage());
+            System.err.println(" Lỗi khi lưu file vai trò: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -364,5 +392,76 @@ public void registerUser(UserModel user) {
             System.out.println(" Không thể đọc file: " + e.getMessage());
         }
     }
- 
+
+    public void loadRolesFromFile(String fileName) {
+        File file = new File(fileName);
+        System.out.println(" Đọc dữ liệu vai trò từ: " + file.getAbsolutePath());
+
+        if (!file.exists()) {
+            System.out.println("File " + fileName + " không tồn tại, tạo file mới với vai trò mặc định");
+            createDefaultRoles();
+            saveRoleToFile(fileName);
+            return;
+        }
+
+        try (FileReader reader = new FileReader(file)) {
+            JsonParser parser = new JsonParser();
+            JsonArray json = parser.parse(reader).getAsJsonArray();
+            List<bean.RoleModel> loadedList = JsonUtils.toBeans(json, bean.RoleModel.class);
+            for (bean.RoleModel role : loadedList) {
+                if (rolesList.stream().noneMatch(exist -> exist.getRoleId().equals(role.getRoleId()))) {
+                    rolesList.add(role);
+                }
+            }
+
+            System.out.println(" Đã load " + rolesList.size() + " vai trò.");
+        } catch (Exception e) {
+            System.out.println(" Không thể đọc file vai trò: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void createDefaultRoles() {
+        // Admin role with all permissions
+        bean.RoleModel adminRole = new bean.RoleModel();
+        adminRole.setRoleId("admin-role");
+        adminRole.setRoleName("Administrator");
+        adminRole.setDescription("Quản trị viên hệ thống với tất cả quyền hạn");
+        adminRole.setPermissions(Arrays.asList(
+            "yard.view", "yard.create", "yard.edit", "yard.delete",
+            "booking.view", "booking.create", "booking.edit", "booking.delete", "booking.approve",
+            "service.view", "service.create", "service.edit", "service.delete",
+            "user.view", "user.create", "user.edit", "user.delete",
+            "role.view", "role.create", "role.edit", "role.delete",
+            "stats.view", "stats.export",
+            "system.settings", "system.backup", "system.restore"
+        ));
+        rolesList.add(adminRole);
+
+        // Manager role with limited permissions
+        bean.RoleModel managerRole = new bean.RoleModel();
+        managerRole.setRoleId("manager-role");
+        managerRole.setRoleName("Manager");
+        managerRole.setDescription("Quản lý với quyền hạn quản lý sân và đặt sân");
+        managerRole.setPermissions(Arrays.asList(
+            "yard.view", "yard.create", "yard.edit",
+            "booking.view", "booking.create", "booking.edit", "booking.approve",
+            "service.view", "service.create", "service.edit",
+            "user.view",
+            "stats.view"
+        ));
+        rolesList.add(managerRole);
+
+        // Staff role with basic permissions
+        bean.RoleModel staffRole = new bean.RoleModel();
+        staffRole.setRoleId("staff-role");
+        staffRole.setRoleName("Nhân viên");
+        staffRole.setDescription("Nhân viên với quyền hạn cơ bản");
+        staffRole.setPermissions(Arrays.asList(
+            "yard.view",
+            "booking.view", "booking.create",
+            "service.view"
+        ));
+        rolesList.add(staffRole);
+    }
 }

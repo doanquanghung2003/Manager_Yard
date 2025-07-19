@@ -24,11 +24,17 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+
 import bean.DepositModel;
 import java.util.ArrayList;
 import bean.PaymentRecord;
 import bean.PaymentStatus;
 import javafx.scene.layout.AnchorPane;
+
+import javafx.scene.layout.BorderPane;
+import javafx.event.ActionEvent;
+import controller.LayoutClientController;
+
 
 public class BookingController implements BaseController {
 
@@ -41,7 +47,14 @@ public class BookingController implements BaseController {
     // Thêm biến để lưu dịch vụ đã chọn
     private Map<String, ServicesModel> selectedServicesPerYard = new HashMap<>();
 
+
     private List<PaymentRecord> payments = new ArrayList<>();
+
+    private LayoutClientController mainLayoutController;
+    public void setMainLayoutController(LayoutClientController controller) {
+        this.mainLayoutController = controller;
+    }
+
 
     @FXML private Button btn_addAll;
     @FXML private Button btn_chooseTime;
@@ -70,7 +83,9 @@ public class BookingController implements BaseController {
     @FXML private TableColumn<ServicesModel, Number> colServicePrice;
     @FXML private TableView<YardInfoRow> tbl_confirmedYards;
     @FXML private Label lblTotalAmount;
-    @FXML private AnchorPane yardMapContainer;
+
+    @FXML private BorderPane mainBorderPane; 
+
 
     public void initialize() {
         // Load data from files
@@ -80,15 +95,6 @@ public class BookingController implements BaseController {
         setOnAction();
         refresh();
 
-        // Debug FXML injection
-        System.out.println("rb_aboutDay: " + rb_aboutDay);
-        System.out.println("rb_weekDay: " + rb_weekDay);
-        System.out.println("tbl_infoYard: " + tbl_infoYard);
-        System.out.println("tbl_services: " + tbl_services);
-        System.out.println("tbl_payment: " + tbl_payment);
-        System.out.println("colServiceName: " + colServiceName);
-        System.out.println("colServiceDesc: " + colServiceDesc);
-        System.out.println("colServicePrice: " + colServicePrice);
 
         // Configure tbl_infoYard columns
         if (tbl_infoYard != null) {
@@ -354,23 +360,24 @@ public class BookingController implements BaseController {
         if (rb_aboutDay != null) rb_aboutDay.selectedProperty().addListener((obs, oldVal, newVal) -> updateTimesTable());
 
         // Sau khi các bảng đã setup xong, load sơ đồ sân vào container
-        loadYardMapView();
+        // loadYardMapView(); // Xoá lời gọi này
     }
 
-    private void loadYardMapView() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlManager/YardMap.fxml"));
-            AnchorPane yardMapPane = loader.load();
-            yardMapContainer.getChildren().clear();
-            yardMapContainer.getChildren().add(yardMapPane);
-            AnchorPane.setTopAnchor(yardMapPane, 0.0);
-            AnchorPane.setBottomAnchor(yardMapPane, 0.0);
-            AnchorPane.setLeftAnchor(yardMapPane, 0.0);
-            AnchorPane.setRightAnchor(yardMapPane, 0.0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // Xoá hàm loadYardMapView
+    // private void loadYardMapView() {
+    //     try {
+    //         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlManager/YardMap.fxml"));
+    //         AnchorPane yardMapPane = loader.load();
+    //         yardMapContainer.getChildren().clear();
+    //         yardMapContainer.getChildren().add(yardMapPane);
+    //         AnchorPane.setTopAnchor(yardMapPane, 0.0);
+    //         AnchorPane.setBottomAnchor(yardMapPane, 0.0);
+    //         AnchorPane.setLeftAnchor(yardMapPane, 0.0);
+    //         AnchorPane.setRightAnchor(yardMapPane, 0.0);
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
     private void updateTimesTable() {
         if (tbl_times != null) {

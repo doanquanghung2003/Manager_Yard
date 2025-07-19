@@ -1,0 +1,71 @@
+[
+  {
+    "roleId": "admin-role",
+    "roleName": "Administrator",
+    "description": "Quản trị viên hệ thống với tất cả quyền hạn",
+    "permissions": [
+      "yard.view",
+      "yard.create",
+      "yard.edit",
+      "yard.delete",
+      "booking.view",
+      "booking.create",
+      "booking.edit",
+      "booking.delete",
+      "booking.approve",
+      "service.view",
+      "service.create",
+      "service.edit",
+      "service.delete",
+      "user.view",
+      "user.create",
+      "user.edit",
+      "user.delete",
+      "role.view",
+      "role.create",
+      "role.edit",
+      "role.delete",
+      "stats.view",
+      "stats.export",
+      "system.settings",
+      "system.backup",
+      "system.restore"
+    ],
+    "createAt": "2024-01-01 00:00:00",
+    "updateAt": "2024-01-01 00:00:00"
+  },
+  {
+    "roleId": "manager-role",
+    "roleName": "Manager",
+    "description": "Quản lý với quyền hạn quản lý sân và đặt sân",
+    "permissions": [
+      "booking.create",
+      "yard.view",
+      "service.create",
+      "service.edit",
+      "booking.edit",
+      "user.view",
+      "yard.create",
+      "booking.view",
+      "yard.edit",
+      "stats.view",
+      "booking.approve",
+      "service.view"
+    ],
+    "createAt": "2024-01-01 00:00:00",
+    "updateAt": "2025-07-19 11:46:00"
+  },
+  {
+    "roleId": "customer-role",
+    "roleName": "Khách hàng",
+    "description": "Khách hàng với quyền hạn đặt sân và xem thông tin cá nhân",
+    "permissions": [
+      "yard.view",
+      "booking.create",
+      "booking.view",
+      "service.view"
+    ],
+    "createAt": "2024-01-01 00:00:00",
+    "updateAt": "2024-01-01 00:00:00"
+  }
+]
