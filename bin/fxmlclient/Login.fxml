@@ -8,18 +8,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20" maxWidth="400"
-      style="-fx-padding: 40; -fx-background-color: white; -fx-background-radius: 16; -fx-effect: dropshadow(gaussian, #888, 8, 0, 0, 2);"
-      styleClass="content-box"
-      xmlns="http://javafx.com/javafx/8.0.202"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controller.LoginController">
+<VBox alignment="CENTER" maxWidth="400" spacing="20" style="-fx-padding: 40; -fx-background-color: white; -fx-background-radius: 16; -fx-effect: dropshadow(gaussian, #888, 8, 0, 0, 2);" styleClass="content-box" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
       
     <children>
         <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" styleClass="logo-image">
@@ -31,7 +25,7 @@
         <TextField fx:id="tft_username" promptText="Tên đăng nhập" styleClass="text-field" />
         <Text fx:id="txt_usernameError" strokeType="OUTSIDE" strokeWidth="0.0" />
         <PasswordField fx:id="tft_password" promptText="Mật khẩu" styleClass="password-field" />
-        <Text fx:id="txt_passwordError" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+        <Text fx:id="txt_passwordError" strokeType="OUTSIDE" strokeWidth="0.0" />
         <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 0 0 0 0;">
             <children>
                 <CheckBox fx:id="rememberMeCheckBox" text="Lưu mật khẩu" />

@@ -1,29 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="15" maxWidth="400" styleClass="content-box" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserInfoController">
-    <children>
-        <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar-image">
-            <image>
-                <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
-            </image>
-        </ImageView>
-        <TextField promptText="Họ và tên" fx:id="nameField" styleClass="text-field"/>
-        <Label fx:id="nameError" text="" style="-fx-text-fill: red; -fx-font-size: 12px;"/>
-        <TextField promptText="Số điện thoại" fx:id="phoneField" styleClass="text-field"/>
-        <Label fx:id="phoneError" text="" style="-fx-text-fill: red; -fx-font-size: 12px;"/>
-        <TextField promptText="Gmail" fx:id="emailField" styleClass="text-field"/>
-        <Label fx:id="emailError" text="" style="-fx-text-fill: red; -fx-font-size: 12px;"/>
-        <TextField promptText="Tên tài khoản" fx:id="usernameField" styleClass="text-field" editable="false"/>
-        <Label fx:id="usernameError" text="" style="-fx-text-fill: red; -fx-font-size: 12px;"/>
-        <TextField promptText="Thẻ" fx:id="cardField" styleClass="text-field"/>
-        <Label fx:id="cardError" text="" style="-fx-text-fill: red; -fx-font-size: 12px;"/>
-        <PasswordField promptText="Mật khẩu mới (nếu đổi)" fx:id="passwordField" styleClass="password-field"/>
-        <Label fx:id="passwordError" text="" style="-fx-text-fill: red; -fx-font-size: 12px;"/>
-        <PasswordField promptText="Xác nhận mật khẩu mới" fx:id="confirmPasswordField" styleClass="password-field"/>
-        <Label fx:id="confirmPasswordError" text="" style="-fx-text-fill: red; -fx-font-size: 12px;"/>
-        <Button text="Lưu thay đổi" fx:id="saveButton" styleClass="login-btn"/>
-    </children>
-</VBox>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserInfoController">
+    <left>
+        <VBox alignment="CENTER" maxWidth="320" minWidth="320" spacing="20" style="-fx-padding: 40; -fx-background-color: rgba(0,60,120,0.85); -fx-background-radius: 16 0 0 16;">
+            <ImageView fx:id="avatarImage" fitHeight="120" fitWidth="120" style="-fx-background-color: #000; -fx-border-radius: 8; -fx-background-radius: 8;">
+                <image>
+                    <Image url="@../images/profile.png" />
+                </image>
+            </ImageView>
+         <Label text="Họ và tên" textFill="WHITE" />
+         <Label text="Ngày tạo" textFill="WHITE" />
+         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Label fx:id="usernameLabel" style="-fx-text-fill: #fff; -fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Label fx:id="joinDateLabel" style="-fx-text-fill: #FFD600; -fx-font-size: 16px;" />
+        </VBox>
+    </left>
+    <right>
+        <VBox alignment="CENTER" maxWidth="320" minWidth="320" spacing="20" style="-fx-padding: 40; -fx-background-color: rgba(0,60,120,0.85); -fx-background-radius: 0 16 16 0;">
+         <children>
+            <Label text="Thông tin mới" textFill="WHITE" />
+            <ImageView fx:id="avatarImage1" fitHeight="120" fitWidth="120" style="-fx-background-color: #000; -fx-border-radius: 8; -fx-background-radius: 8;">
+               <image>
+                  <Image url="@../../../../OneDrive/Hình%20ảnh/Ảnh/LogoDH2.png" />
+               </image>
+            </ImageView>
+            <Label text="Sân mới" textFill="WHITE" />
+            <Label text="Dịch vụ mới" textFill="WHITE" />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Label fx:id="usernameLabel1" style="-fx-text-fill: #fff; -fx-font-size: 20px; -fx-font-weight: bold;" />
+            <Label fx:id="joinDateLabel1" style="-fx-text-fill: #FFD600; -fx-font-size: 16px;" />
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" style="-fx-background-color: white; -fx-background-radius: 0;">
+         <top>
+                <Label alignment="CENTER" prefHeight="61.0" prefWidth="320.0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1976D2;" text="THÔNG TIN TÀI KHOẢN" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+         </top>
+         <center>
+            <GridPane alignment="CENTER" hgap="18" maxWidth="600" vgap="18" BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" minWidth="120" />
+                  <ColumnConstraints halignment="LEFT" minWidth="250" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="30.0" />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+               <children>
+                  <Label style="-fx-text-fill: #1976D2;" text="Email" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                  <TextField fx:id="emailField" editable="false" style="-fx-background-color: #e3f2fd; -fx-text-fill: #222;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                  <Label style="-fx-text-fill: #1976D2;" text="Tài khoản" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                  <TextField fx:id="usernameField" editable="false" style="-fx-background-color: #e3f2fd; -fx-text-fill: #222;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label style="-fx-text-fill: #1976D2;" text="Họ và tên" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  <TextField fx:id="nameField" style="-fx-background-color: #e3f2fd; -fx-text-fill: #222;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label style="-fx-text-fill: #1976D2;" text="Vé đã thuê" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                  <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <RadioButton fx:id="maleRadio" style="-fx-text-fill: #1976D2;" text="Ngày" />
+                        <RadioButton fx:id="femaleRadio" style="-fx-text-fill: #1976D2;" text="Tháng" />
+                        <RadioButton fx:id="otherRadio" style="-fx-text-fill: #1976D2;" text="Sự kiện" />
+                     </children>
+                  </HBox>
+                  <Label style="-fx-text-fill: #1976D2;" text="Mật khẩu" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                  <PasswordField fx:id="passwordField" promptText="Để trống nếu không muốn đổi" style="-fx-background-color: #e3f2fd; -fx-text-fill: #222;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label style="-fx-text-fill: #1976D2;" text="Avatar" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                  <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <Button fx:id="chooseAvatarBtn" text="Chọn tệp" />
+                        <Label fx:id="avatarFileName" style="-fx-text-fill: #1976D2;" text="Không tệp nào được chọn" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </center>
+         <bottom>
+                <Button fx:id="updateBtn" style="-fx-background-color: #FFD600; -fx-text-fill: #222; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 6;" text="CẬP NHẬT" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </center>
+</BorderPane>

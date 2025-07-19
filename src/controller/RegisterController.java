@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import controller.LayoutClientController;
+import controller.LoginController;
 
 public class RegisterController implements BaseController {
 
@@ -57,6 +59,11 @@ public class RegisterController implements BaseController {
 
     @FXML
     private Label usernameError;
+
+    private LayoutClientController mainLayoutController;
+    public void setMainLayoutController(LayoutClientController controller) {
+        this.mainLayoutController = controller;
+    }
 
 	@Override
 	public void constructorView() {
@@ -120,12 +127,20 @@ public class RegisterController implements BaseController {
 
     private void openLoginView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlclient/Login.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) hl_login.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Đăng nhập");
-            stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/Login.fxml"));
+            Parent loginRoot = loader.load();
+            // Truyền controller cha nếu có
+            LoginController loginController = loader.getController();
+            if (mainLayoutController != null) {
+                loginController.setMainLayoutController(mainLayoutController);
+                mainLayoutController.setContent(loginRoot);
+            } else {
+                // fallback: đổi scene nếu không có controller cha
+                Stage stage = (Stage) hl_login.getScene().getWindow();
+                stage.setScene(new Scene(loginRoot));
+                stage.setTitle("Đăng nhập");
+                stage.show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
