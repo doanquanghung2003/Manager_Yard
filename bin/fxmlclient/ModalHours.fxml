@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModalHoursController">
+<VBox xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ModalHoursController">
    <children>
       <FlowPane fx:id="flp_modalHours" hgap="10.0" prefHeight="400.0" prefWidth="600.0" vgap="10.0">
       

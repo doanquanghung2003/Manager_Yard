@@ -10,7 +10,7 @@
 
 <VBox fx:id="rootCard" alignment="CENTER" prefHeight="220.0" prefWidth="340.0" spacing="10"
       styleClass="product-card-milk"
-      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controller.ProductItemController">
    <padding>
       <Insets bottom="10" left="10" right="10" top="10" />

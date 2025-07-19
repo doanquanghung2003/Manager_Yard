@@ -12,8 +12,16 @@ public class Main extends Application {
 		try {
 
 			FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/mainLayout/LayoutClient.fxml"));
+			System.out.println("FXML resource URL: " + getClass().getResource("/mainLayout/LayoutClient.fxml"));
 			Parent mainRoot = mainLoader.load();
 			controller.LayoutClientController mainController = mainLoader.getController();
+			
+			// Debug: Check if controller was loaded properly
+			System.out.println("Main controller loaded: " + mainController);
+			if (mainController != null) {
+				System.out.println("Controller class: " + mainController.getClass().getName());
+			}
+			
 			primaryStage.setScene(new Scene(mainRoot));
 			primaryStage.setTitle("Manager Yard - Small View");
 			primaryStage.setWidth(1000);

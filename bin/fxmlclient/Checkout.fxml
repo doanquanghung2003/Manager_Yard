@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="884.0" prefWidth="1742.0" styleClass="center-bg" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BookingController">
+<AnchorPane prefHeight="884.0" prefWidth="1742.0" styleClass="center-bg" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BookingController">
     <children>
         <ScrollPane fitToHeight="false" fitToWidth="true" hbarPolicy="AS_NEEDED" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <content>
