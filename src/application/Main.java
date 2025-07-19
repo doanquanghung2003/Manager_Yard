@@ -11,9 +11,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 
-			FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/fxmlManager/Dashboard.fxml"));
+			FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/mainLayout/LayoutClient.fxml"));
 			Parent mainRoot = mainLoader.load();
-			controller.DashboardController mainController = mainLoader.getController();
+			controller.LayoutClientController mainController = mainLoader.getController();
 			primaryStage.setScene(new Scene(mainRoot));
 			primaryStage.setTitle("Manager Yard - Small View");
 			primaryStage.setWidth(1000);

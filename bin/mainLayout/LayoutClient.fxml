@@ -12,7 +12,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="mainLayout" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LayoutClientController">
+
+<BorderPane fx:id="mainLayout" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LayoutClientController">
+
     <top>
         <VBox alignment="TOP_CENTER">
             <!-- Header -->
@@ -79,7 +81,7 @@
         </VBox>
     </top>
     <center>
-        <StackPane fx:id="stp_contentPane" prefHeight="1320.0" prefWidth="1358.0" />
+        <StackPane fx:id="contentPane" alignment="CENTER"/>
     </center>
     <bottom>
         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="footer-bar" BorderPane.alignment="CENTER">

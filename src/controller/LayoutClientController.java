@@ -8,20 +8,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.BorderPane;
 import java.io.IOException;
-import controller.YardController;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import bean.UserModel;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+
 
 public class LayoutClientController {
     @FXML
-    private StackPane stp_contentPane;
+    private StackPane contentPane;
 
     @FXML private Button userInfoBtn;
     @FXML private Button productListBtn;
@@ -33,6 +31,11 @@ public class LayoutClientController {
         this.mainLayoutController = controller;
     }
 
+    public void setCurrentUser(UserModel user) {
+        this.currentUser = user;
+        updateAvatarMenu();
+    }
+
     @FXML
     public void initialize() {
         if (userInfoBtn != null) userInfoBtn.setOnAction(event -> handleUserInfo());
@@ -41,7 +44,7 @@ public class LayoutClientController {
     }
 
     public void setContent(Node node) {
-        stp_contentPane.getChildren().setAll(node);
+    	contentPane.getChildren().setAll(node);
     }
 
     private void handleSearch() {
@@ -49,7 +52,20 @@ public class LayoutClientController {
     }
 
     private void handleUserInfo() {
-        System.out.println("Quản lý thông tin người dùng");
+        handleUserInfo(null);
+    }
+
+    @FXML
+    private void handleUserInfo(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/UserInfo.fxml"));
+            Parent userInfo = loader.load();
+            UserInfoController controller = loader.getController();
+            controller.setUser(currentUser); 
+            contentPane.getChildren().setAll(userInfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void handleLogout() {
@@ -95,7 +111,7 @@ public class LayoutClientController {
             avatarMenuBtn.getItems().add(loginItem);
         } else {
             MenuItem infoItem = new MenuItem("Quản lý thông tin");
-            infoItem.setOnAction(e -> openUserInfo());
+            infoItem.setOnAction(e -> handleUserInfo(null)); // Changed to call handleUserInfo directly
             MenuItem historyItem = new MenuItem("Lịch sử đặt sân");
             historyItem.setOnAction(e -> openBookingHistory());
             MenuItem logoutItem = new MenuItem("Đăng xuất");
@@ -108,6 +124,8 @@ public class LayoutClientController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/Login.fxml"));
             Parent loginRoot = loader.load();
+            LoginController loginController = loader.getController();
+            loginController.setMainLayoutController(this); // Truyền controller cha
             setContent(loginRoot);
         } catch (IOException e) {
             e.printStackTrace();
@@ -118,8 +136,10 @@ public class LayoutClientController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlClient/Register.fxml"));
             Parent registerRoot = loader.load();
+            RegisterController registerController = loader.getController();
+            registerController.setMainLayoutController(this); // this là LayoutClientController
             setContent(registerRoot);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

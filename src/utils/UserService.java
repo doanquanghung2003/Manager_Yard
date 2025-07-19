@@ -41,4 +41,24 @@ public class UserService {
         users.add(user);
         saveUsers(users);
     }
+
+    public static UserModel getUserByUsername(String username) {
+        return loadUsers().stream()
+            .filter(u -> u.getUserName().equalsIgnoreCase(username))
+            .findFirst().orElse(null);
+    }
+
+    public static UserModel getUserByLogin(String username, String password) {
+        try (FileReader reader = new FileReader("users.json")) {
+            List<UserModel> users = new Gson().fromJson(reader, new TypeToken<List<UserModel>>(){}.getType());
+            for (UserModel user : users) {
+                if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+                    return user;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
